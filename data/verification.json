@@ -1,0 +1,14 @@
+{
+  "verified": true,
+  "rows": 45821586,
+  "files": 228,
+  "checks": [
+    "SHA-256 for every CSV",
+    "CSV parsing of every row",
+    "column count",
+    "year/month membership",
+    "row counts",
+    "file sizes",
+    "source byte accounting"
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "release_tag": "spl-monthly-2005-2025-v1",
+  "archives": [
+    {
+      "year": 2006,
+      "filename": "spl-checkouts_2006.zip",
+      "bytes": 108912169,
+      "sha256": "572e4349aa48c8a3b568078b87248758690a67b54ec4ae7e38f1096b029cb0b9",
+      "rows": 1938925,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 390421724,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2006.zip"
+    },
+    {
+      "year": 2007,
+      "filename": "spl-checkouts_2007.zip",
+      "bytes": 118326559,
+      "sha256": "50b5e4111b8a5634d7a4375accaa6ab05f575e087ce82c070e9118b5b4b68a4d",
+      "rows": 2040106,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 421441100,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2007.zip"
+    },
+    {
+      "year": 2008,
+      "filename": "spl-checkouts_2008.zip",
+      "bytes": 129999784,
+      "sha256": "ea3a8b1a776b2615537b9d9cec2afa8a45f8c0f7b0a259edc1edf0fb42c8c84d",
+      "rows": 2136504,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 457534310,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2008.zip"
+    },
+    {
+      "year": 2009,
+      "filename": "spl-checkouts_2009.zip",
+      "bytes": 143479828,
+      "sha256": "2933ff85c9a9f6a87a1e5519b98d4ccc1b1f57f9c341cbc0833e0f121e5686e9",
+      "rows": 2226650,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 497845161,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2009.zip"
+    },
+    {
+      "year": 2010,
+      "filename": "spl-checkouts_2010.zip",
+      "bytes": 149804983,
+      "sha256": "4e8e11b302db7a2c4f797228dedde915a4b138180616812525a64ed670c1e711",
+      "rows": 2190185,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 513580944,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2010.zip"
+    },
+    {
+      "year": 2011,
+      "filename": "spl-checkouts_2011.zip",
+      "bytes": 162765692,
+      "sha256": "fba3a625c8c6d587958ac910569e44834fa7beaf6a7fa9385a321078db1719f0",
+      "rows": 2335873,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 553155777,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2011.zip"
+    },
+    {
+      "year": 2012,
+      "filename": "spl-checkouts_2012.zip",
+      "bytes": 171392814,
+      "sha256": "8f0a3de54e2d59ac28431fb6ce0d48f88b7aa66092b8b025989fc00dc48a307d",
+      "rows": 2397811,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 579643557,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2012.zip"
+    },
+    {
+      "year": 2013,
+      "filename": "spl-checkouts_2013.zip",
+      "bytes": 186027859,
+      "sha256": "5c5ade669c4d613962bf59e508c00f4487179d9140d966e30c9f6c05c8217c9c",
+      "rows": 2513758,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 624049382,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2013.zip"
+    },
+    {
+      "year": 2014,
+      "filename": "spl-checkouts_2014.zip",
+      "bytes": 196402080,
+      "sha256": "5164758d683a0fd4cfee3151fd68bfe45f89ff42081a90d06299d34ccc480f2b",
+      "rows": 2609700,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 658723002,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2014.zip"
+    },
+    {
+      "year": 2015,
+      "filename": "spl-checkouts_2015.zip",
+      "bytes": 205384184,
+      "sha256": "71dcbf534a6c33518c9ff4132aebb9673315a66a7dd2b9c61ba7e80833a30fe3",
+      "rows": 2729531,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 689070948,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2015.zip"
+    },
+    {
+      "year": 2016,
+      "filename": "spl-checkouts_2016.zip",
+      "bytes": 210699533,
+      "sha256": "90473a38e8ec5f8415b89acd979b6febefb7fd1c30d902bcfce1b6628dd9a2f1",
+      "rows": 2787319,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 707358415,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2016.zip"
+    },
+    {
+      "year": 2017,
+      "filename": "spl-checkouts_2017.zip",
+      "bytes": 213580651,
+      "sha256": "0e6afcf04c9b38daf64842d76fad08a7985c7cc23cdb8f7def0b729db117948e",
+      "rows": 2820433,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 718558476,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2017.zip"
+    },
+    {
+      "year": 2018,
+      "filename": "spl-checkouts_2018.zip",
+      "bytes": 205790416,
+      "sha256": "6f167c2a3482630c4ae390734bd93897bd170ba60c9e6402e271bab7d9e23ea2",
+      "rows": 2665098,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 694821066,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2018.zip"
+    },
+    {
+      "year": 2019,
+      "filename": "spl-checkouts_2019.zip",
+      "bytes": 203554676,
+      "sha256": "fa6bf3019e1ab5ae8729c3d0e36247d18a2b37acf5753400f8d6754c839f3b0e",
+      "rows": 2589001,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 692122650,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2019.zip"
+    },
+    {
+      "year": 2020,
+      "filename": "spl-checkouts_2020.zip",
+      "bytes": 110689405,
+      "sha256": "3416594bc8a67cbda5ddc94ad6821fee9f98a9dcd5e81a0702f3a1805f0044c4",
+      "rows": 1721376,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 408000688,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2020.zip"
+    },
+    {
+      "year": 2021,
+      "filename": "spl-checkouts_2021.zip",
+      "bytes": 164501151,
+      "sha256": "9f29b8a85f8766b6eea7faf02c33fc4ecfbce46d6053fdb4fbe05f628c0a2347",
+      "rows": 2242272,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 577148250,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2021.zip"
+    },
+    {
+      "year": 2022,
+      "filename": "spl-checkouts_2022.zip",
+      "bytes": 208669414,
+      "sha256": "c2911972de6addceda2d429ab8b995b6b4f194f73419683e5e310a4db811b38b",
+      "rows": 2531508,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 697385369,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2022.zip"
+    },
+    {
+      "year": 2023,
+      "filename": "spl-checkouts_2023.zip",
+      "bytes": 226582374,
+      "sha256": "1446aab1887de4033c9474ec396f4e78ae98dc1788ecd5e2489d1fbcc8737175",
+      "rows": 2676026,
+      "csv_files": 12,
+      "uncompressed_csv_bytes": 745909774,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2023.zip"
+    },
+    {
+      "year": 2024,
+      "filename": "spl-checkouts_2024.zip",
+      "bytes": 182476624,
+      "sha256": "1164d0d9eec3b807c62554f4a85ff8d6f0561ffa11414a10e671434dc41ed743",
+      "rows": 2202269,
+      "csv_files": 10,
+      "uncompressed_csv_bytes": 607016753,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2024.zip"
+    },
+    {
+      "year": 2025,
+      "filename": "spl-checkouts_2025.zip",
+      "bytes": 39056762,
+      "sha256": "ed1968d4de160822a3be38b3e07a9278bd99ac7d3f2aa44a521461e6ed39e550",
+      "rows": 467241,
+      "csv_files": 2,
+      "uncompressed_csv_bytes": 128700243,
+      "url": "https://github.com/wyfARTHUR/DSCPproject7/releases/download/spl-monthly-2005-2025-v1/spl-checkouts_2025.zip"
+    }
+  ]
+}

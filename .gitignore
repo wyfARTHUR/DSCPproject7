@@ -1,0 +1,7 @@
+# Large datasets are distributed through Releases.
+*.csv
+*.zip
+*.partial
+*.tmp
+data/monthly_csv/
+__pycache__/

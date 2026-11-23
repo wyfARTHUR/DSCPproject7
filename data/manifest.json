@@ -1,0 +1,2086 @@
+{
+  "format_version": 1,
+  "source": {
+    "filename": "spl-monthly-checkouts_2005-2025.csv",
+    "bytes": 11362453085,
+    "sha256": "8ca3036ed886660b01e6b3c93bf376c2131e2c385d29347ea73199749195872e",
+    "rows": 45821586,
+    "columns": [
+      "usageclass",
+      "checkouttype",
+      "materialtype",
+      "checkoutyear",
+      "checkoutmonth",
+      "checkouts",
+      "title",
+      "subjects",
+      "creator",
+      "publisher",
+      "publicationyear",
+      "isbn"
+    ],
+    "header_bytes": 152
+  },
+  "split": {
+    "method": "checkoutyear + checkoutmonth",
+    "csv_max_bytes_exclusive": 3900000000,
+    "encoding": "UTF-8",
+    "record_bytes_preserved": true,
+    "order_within_month_preserved": true,
+    "global_order_preserved": false
+  },
+  "files": [
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-01_part01.csv",
+      "year": 2006,
+      "month": 1,
+      "part": 1,
+      "rows": 167438,
+      "bytes": 33404406,
+      "sha256": "481b5c25dd484255d01567c0ffbf4f55730dba534706772d30e24c16890f1603"
+    },
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-02_part01.csv",
+      "year": 2006,
+      "month": 2,
+      "part": 1,
+      "rows": 161634,
+      "bytes": 32358665,
+      "sha256": "1d2dd23087c5e9f8976e2626cd727093f81ef73bd9d22c9312f41b8413d31531"
+    },
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-03_part01.csv",
+      "year": 2006,
+      "month": 3,
+      "part": 1,
+      "rows": 172361,
+      "bytes": 34541698,
+      "sha256": "c3a358d65be691b607ae6192e806ae7a421097401240c852e83d5d55a25db266"
+    },
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-04_part01.csv",
+      "year": 2006,
+      "month": 4,
+      "part": 1,
+      "rows": 158255,
+      "bytes": 31801140,
+      "sha256": "7080c7b740fb8b8f33bd7e995d990c3f60e07c511d9df99617457a7743270044"
+    },
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-05_part01.csv",
+      "year": 2006,
+      "month": 5,
+      "part": 1,
+      "rows": 153140,
+      "bytes": 30888862,
+      "sha256": "d1eed86bedb0f1a9a48dbc302db5176405d8cbbe6cf1504a1e1fe2161d3f0b89"
+    },
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-06_part01.csv",
+      "year": 2006,
+      "month": 6,
+      "part": 1,
+      "rows": 156143,
+      "bytes": 31227777,
+      "sha256": "fafb7abbd79c08ebd4c5b6f28e8a6f06448dc5e04ddec8c0e7e0b9e8a56689ba"
+    },
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-07_part01.csv",
+      "year": 2006,
+      "month": 7,
+      "part": 1,
+      "rows": 163775,
+      "bytes": 32765572,
+      "sha256": "81c448b4ab87054a24856c00b9246ffa23ea1be0627b8f955c995c3a8f5b40a7"
+    },
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-08_part01.csv",
+      "year": 2006,
+      "month": 8,
+      "part": 1,
+      "rows": 166730,
+      "bytes": 33434871,
+      "sha256": "b5b5106bcd7b3aa3035a0fe9999689f777db5748e89c400cd784c05639614062"
+    },
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-09_part01.csv",
+      "year": 2006,
+      "month": 9,
+      "part": 1,
+      "rows": 161841,
+      "bytes": 32595334,
+      "sha256": "ff9ef54980408d2a0656c4532844d330ecf388010f12471129b4351ba700a7ae"
+    },
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-10_part01.csv",
+      "year": 2006,
+      "month": 10,
+      "part": 1,
+      "rows": 163175,
+      "bytes": 33167384,
+      "sha256": "e4b58a3b0528d26a8bc40fe3d9ad8bb3ab8c46f233cbd86246983cf752815e81"
+    },
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-11_part01.csv",
+      "year": 2006,
+      "month": 11,
+      "part": 1,
+      "rows": 161742,
+      "bytes": 33062292,
+      "sha256": "355ed2d96ad28c91fdb1b3eb889cc981912363a4f836249274608a78a84ffbde"
+    },
+    {
+      "path": "monthly_csv/2006/spl-checkouts_2006-12_part01.csv",
+      "year": 2006,
+      "month": 12,
+      "part": 1,
+      "rows": 152691,
+      "bytes": 31173723,
+      "sha256": "46798aa3a93a992589b6d38e842ea71ccf5dde4d06533c987b5370c9ef878dd8"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-01_part01.csv",
+      "year": 2007,
+      "month": 1,
+      "part": 1,
+      "rows": 169282,
+      "bytes": 34597177,
+      "sha256": "e6665f52f25770802cc6a4934b577289c3fe6fc138897102ffd30d4d6e8ca17e"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-02_part01.csv",
+      "year": 2007,
+      "month": 2,
+      "part": 1,
+      "rows": 165459,
+      "bytes": 33921429,
+      "sha256": "98fd9b714975a23ac61130e1323107e02e0f70d863fb4e56479df27b6e5dd91f"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-03_part01.csv",
+      "year": 2007,
+      "month": 3,
+      "part": 1,
+      "rows": 172880,
+      "bytes": 35473253,
+      "sha256": "d8422249a0e7cb460c838350c92a53b038d033729dbd3ffa3eb75b2e80fa7c14"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-04_part01.csv",
+      "year": 2007,
+      "month": 4,
+      "part": 1,
+      "rows": 169589,
+      "bytes": 34895372,
+      "sha256": "ae17d2cb198c7d38e6e72b03126bd769daffa0cf17cea2af157451f897448032"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-05_part01.csv",
+      "year": 2007,
+      "month": 5,
+      "part": 1,
+      "rows": 169229,
+      "bytes": 34895312,
+      "sha256": "b484144580f502873f25c0906db7a5265f6326c27fbd8746b0440fad2d971bc2"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-06_part01.csv",
+      "year": 2007,
+      "month": 6,
+      "part": 1,
+      "rows": 170689,
+      "bytes": 35033803,
+      "sha256": "f09aa11b8051e126f3c3e33ee0b7f65f8b4b520b7938be980c8476701f8031a6"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-07_part01.csv",
+      "year": 2007,
+      "month": 7,
+      "part": 1,
+      "rows": 171096,
+      "bytes": 35105542,
+      "sha256": "07a6006942f8c87f96dc5565ee3508d34c619bb21aacded03ded3db8feeef516"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-08_part01.csv",
+      "year": 2007,
+      "month": 8,
+      "part": 1,
+      "rows": 174262,
+      "bytes": 35802140,
+      "sha256": "e41cc8dd25b16f7c4e229ca7fd5008c4802744e29b86c6189c4599b2b7cfb4ec"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-09_part01.csv",
+      "year": 2007,
+      "month": 9,
+      "part": 1,
+      "rows": 168315,
+      "bytes": 34855631,
+      "sha256": "8ba0343c2ee58545e9239225ca4d562328016a5f46414e89dc98b8bb027f771e"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-10_part01.csv",
+      "year": 2007,
+      "month": 10,
+      "part": 1,
+      "rows": 174404,
+      "bytes": 36497782,
+      "sha256": "8abd3d1db56c2f98d7c263a1214f0237f30d59e3b565b1d2b8adc32d645dc829"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-11_part01.csv",
+      "year": 2007,
+      "month": 11,
+      "part": 1,
+      "rows": 172918,
+      "bytes": 36313959,
+      "sha256": "f62286fdfc328c9fb0cda8e42de43ee2454c10a3bbad4d9bb6fc7622779275b1"
+    },
+    {
+      "path": "monthly_csv/2007/spl-checkouts_2007-12_part01.csv",
+      "year": 2007,
+      "month": 12,
+      "part": 1,
+      "rows": 161983,
+      "bytes": 34049700,
+      "sha256": "c0b26cdad9af302709478d465afb521aa6b16102a436ef372ed526ac6a15f69e"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-01_part01.csv",
+      "year": 2008,
+      "month": 1,
+      "part": 1,
+      "rows": 180795,
+      "bytes": 37971581,
+      "sha256": "a8e6b954afe24fd24e4b7918294853ae8d01bd99faf938d57b668dc472301c07"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-02_part01.csv",
+      "year": 2008,
+      "month": 2,
+      "part": 1,
+      "rows": 176464,
+      "bytes": 37158415,
+      "sha256": "54ffe49e5dba87f9047a1c6298c86037ad0d3f653e49101e458924f86ee47b8f"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-03_part01.csv",
+      "year": 2008,
+      "month": 3,
+      "part": 1,
+      "rows": 169285,
+      "bytes": 35835222,
+      "sha256": "094648c78ab8c47f0ec4e9d546fd7683969f1c17468ff64c7f9f95971279c5cb"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-04_part01.csv",
+      "year": 2008,
+      "month": 4,
+      "part": 1,
+      "rows": 181242,
+      "bytes": 38397298,
+      "sha256": "e2d41234c937455422f921efff60b03ba54731780fe5c6b84768019b5b0e46a4"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-05_part01.csv",
+      "year": 2008,
+      "month": 5,
+      "part": 1,
+      "rows": 175849,
+      "bytes": 37452504,
+      "sha256": "c27818452d61237d3ba40778f39ecc3f075df1cabaa8bf53685814a6eb2273b7"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-06_part01.csv",
+      "year": 2008,
+      "month": 6,
+      "part": 1,
+      "rows": 178485,
+      "bytes": 37998770,
+      "sha256": "17eb00b36af18a09f8f63d4e4328fef81465a544dce44a5316db4004189df584"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-07_part01.csv",
+      "year": 2008,
+      "month": 7,
+      "part": 1,
+      "rows": 183163,
+      "bytes": 39090989,
+      "sha256": "631dbf1ef360d301dfc8b549a7f7c94ec43ac9d9b95aa2b21043ae8fca3574fb"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-08_part01.csv",
+      "year": 2008,
+      "month": 8,
+      "part": 1,
+      "rows": 179577,
+      "bytes": 38473065,
+      "sha256": "5012cb40153654053b84fc4098bb066a33cdd1a06944e36fedc19ba5753993ab"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-09_part01.csv",
+      "year": 2008,
+      "month": 9,
+      "part": 1,
+      "rows": 177986,
+      "bytes": 38386814,
+      "sha256": "bc9fd21ec345d1622f67ff8979a378a7dbb3d995c059b932d1f5fc9c71cd2dc2"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-10_part01.csv",
+      "year": 2008,
+      "month": 10,
+      "part": 1,
+      "rows": 180267,
+      "bytes": 39363215,
+      "sha256": "d6930e7bfb66431e839dcf08d8e91680d1374c605b6b9d6756c57e70120391c7"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-11_part01.csv",
+      "year": 2008,
+      "month": 11,
+      "part": 1,
+      "rows": 181644,
+      "bytes": 39729582,
+      "sha256": "94de015564e9b679a80fc5b3ab0935d40f479bf80d625f83cb5687222d19c9bf"
+    },
+    {
+      "path": "monthly_csv/2008/spl-checkouts_2008-12_part01.csv",
+      "year": 2008,
+      "month": 12,
+      "part": 1,
+      "rows": 171747,
+      "bytes": 37676855,
+      "sha256": "1ea1c540a3079f8f8ce5a7ec986f94ac18c5d2ae21ae2e96926841f5c281994f"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-01_part01.csv",
+      "year": 2009,
+      "month": 1,
+      "part": 1,
+      "rows": 191929,
+      "bytes": 42041580,
+      "sha256": "a2c0b7f3a21e3e0c60f82ba49fc725d16e6b04141d828a2ba378b250e6a1279c"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-02_part01.csv",
+      "year": 2009,
+      "month": 2,
+      "part": 1,
+      "rows": 185745,
+      "bytes": 40931251,
+      "sha256": "9ac269c9a4a9de84dc691e8d4648879521d37c9b15b6442107473a944a771cef"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-03_part01.csv",
+      "year": 2009,
+      "month": 3,
+      "part": 1,
+      "rows": 195957,
+      "bytes": 43102520,
+      "sha256": "8a5246fe24f102dd738a13c350600b20a5d0b84a96d919e22f85a912f549defb"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-04_part01.csv",
+      "year": 2009,
+      "month": 4,
+      "part": 1,
+      "rows": 188340,
+      "bytes": 41627421,
+      "sha256": "efcabd63d9c9544ad203086e9e8190cb8d66d9573fd71202d121be766c672a52"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-05_part01.csv",
+      "year": 2009,
+      "month": 5,
+      "part": 1,
+      "rows": 185462,
+      "bytes": 41226919,
+      "sha256": "b5e527551a8974b7f3d1adcff6a2341210af0a06db7783e82cf722c3dcc35357"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-06_part01.csv",
+      "year": 2009,
+      "month": 6,
+      "part": 1,
+      "rows": 186854,
+      "bytes": 41448655,
+      "sha256": "7e97f1e250a7691788218309a2c61e5fb32304788872915e1248e730afc6495d"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-07_part01.csv",
+      "year": 2009,
+      "month": 7,
+      "part": 1,
+      "rows": 191063,
+      "bytes": 42515440,
+      "sha256": "bec7e0c7f43b8524896cec2d603bbb0352e48105e07f1b927a82068cd902cbb2"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-08_part01.csv",
+      "year": 2009,
+      "month": 8,
+      "part": 1,
+      "rows": 191236,
+      "bytes": 42821895,
+      "sha256": "af0c6b1d4fea2f35dfecc37574ced4334cb9c8fac1fe9ce85c5cd6fb7a4977f2"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-09_part01.csv",
+      "year": 2009,
+      "month": 9,
+      "part": 1,
+      "rows": 169152,
+      "bytes": 38238816,
+      "sha256": "01fd4b389968d3a326b302ef829272d7c687164e8341eab33c238226babf2d1c"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-10_part01.csv",
+      "year": 2009,
+      "month": 10,
+      "part": 1,
+      "rows": 186468,
+      "bytes": 42404461,
+      "sha256": "21121fe58d9538277086de8507cc92cdc6cb0a4cc3d69f0686289d2e1651a715"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-11_part01.csv",
+      "year": 2009,
+      "month": 11,
+      "part": 1,
+      "rows": 180588,
+      "bytes": 41413104,
+      "sha256": "049256e48e3fc67311dc59dee3ee1e83ad70b8d9117bc1b039c4ed71e1b74c62"
+    },
+    {
+      "path": "monthly_csv/2009/spl-checkouts_2009-12_part01.csv",
+      "year": 2009,
+      "month": 12,
+      "part": 1,
+      "rows": 173856,
+      "bytes": 40073099,
+      "sha256": "b8831c78536ae6ce06be2db697df24575bf6885b03818e802995c5b473a7de14"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-01_part01.csv",
+      "year": 2010,
+      "month": 1,
+      "part": 1,
+      "rows": 186553,
+      "bytes": 42931630,
+      "sha256": "b9b3207544b5038b65180d17064510059c4915eb79f2340eb3c43e54940d7e62"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-02_part01.csv",
+      "year": 2010,
+      "month": 2,
+      "part": 1,
+      "rows": 179504,
+      "bytes": 41538389,
+      "sha256": "5c03df1a0d3239d6d3300fb3a92e6fa7028823df425a5a26c9ba6727debe7949"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-03_part01.csv",
+      "year": 2010,
+      "month": 3,
+      "part": 1,
+      "rows": 189053,
+      "bytes": 43730128,
+      "sha256": "756691715a1e1dc6a775637e2b536ebf76dde8e4f72c8ab8b1d67887b7f667c5"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-04_part01.csv",
+      "year": 2010,
+      "month": 4,
+      "part": 1,
+      "rows": 182907,
+      "bytes": 42615660,
+      "sha256": "0636b1f90b1efb7a206a3d6758f87f3f4ed17d49862d18f51c823812d0fe7f4e"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-05_part01.csv",
+      "year": 2010,
+      "month": 5,
+      "part": 1,
+      "rows": 182378,
+      "bytes": 42618923,
+      "sha256": "f189ab3da618138b4f3ec7d76037abc4b74edd7df73e29f236b1b3fea863510b"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-06_part01.csv",
+      "year": 2010,
+      "month": 6,
+      "part": 1,
+      "rows": 185113,
+      "bytes": 43284506,
+      "sha256": "8ac3c188dfab7a78e51005e5cd654fafa55f060b71382544fe6901d181d62960"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-07_part01.csv",
+      "year": 2010,
+      "month": 7,
+      "part": 1,
+      "rows": 184401,
+      "bytes": 43139020,
+      "sha256": "058bf24186b25e5a23d4852657937fae788fc08200a3acc3ccad65cee64604e0"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-08_part01.csv",
+      "year": 2010,
+      "month": 8,
+      "part": 1,
+      "rows": 185879,
+      "bytes": 43654347,
+      "sha256": "d86e75fa151d68e7ef287cb1aea0e32f93843139a365a0d3d014aa446e1ccb42"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-09_part01.csv",
+      "year": 2010,
+      "month": 9,
+      "part": 1,
+      "rows": 170143,
+      "bytes": 40250029,
+      "sha256": "d111a083cdb1aff5f653583a2437b5e725552ab683ab733bf435bd228fe31425"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-10_part01.csv",
+      "year": 2010,
+      "month": 10,
+      "part": 1,
+      "rows": 184344,
+      "bytes": 43802457,
+      "sha256": "4e2d983f0afb56ab2d33b03b1cb9c911436954e5db07339fae293f261bd7c9e0"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-11_part01.csv",
+      "year": 2010,
+      "month": 11,
+      "part": 1,
+      "rows": 180814,
+      "bytes": 43194373,
+      "sha256": "77526e613094f959620b875217f38b25bc62ccd14028c26d93c1327f1ac292ac"
+    },
+    {
+      "path": "monthly_csv/2010/spl-checkouts_2010-12_part01.csv",
+      "year": 2010,
+      "month": 12,
+      "part": 1,
+      "rows": 179096,
+      "bytes": 42821482,
+      "sha256": "30e1e5eaff5fc9f1ea77131459a69351dbf274dd7ceb8af0b23fad09bf9acae0"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-01_part01.csv",
+      "year": 2011,
+      "month": 1,
+      "part": 1,
+      "rows": 198842,
+      "bytes": 46407592,
+      "sha256": "11c7e6b2e3e5aded7bd4d92a25396dee8a1496038596267890568aa83d56d3ed"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-02_part01.csv",
+      "year": 2011,
+      "month": 2,
+      "part": 1,
+      "rows": 193959,
+      "bytes": 45436791,
+      "sha256": "7566da2c4253338439b9e80b29890e14cc379f2551e4abaceb120a9999f1478c"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-03_part01.csv",
+      "year": 2011,
+      "month": 3,
+      "part": 1,
+      "rows": 193918,
+      "bytes": 45438715,
+      "sha256": "42b228e39d5b2d111dcaac9549b52355d8cfd53da06fd64bc743399f2279ba37"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-04_part01.csv",
+      "year": 2011,
+      "month": 4,
+      "part": 1,
+      "rows": 197499,
+      "bytes": 46490716,
+      "sha256": "5f3ee59acd01de43bce0c842b318d4c65539108095cde85e7012fd92b39b3a6f"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-05_part01.csv",
+      "year": 2011,
+      "month": 5,
+      "part": 1,
+      "rows": 192803,
+      "bytes": 45619349,
+      "sha256": "7bd799b6d7417d40a92b06e04ce0ba2cf2e86301eacaf37531f549d817e30a3d"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-06_part01.csv",
+      "year": 2011,
+      "month": 6,
+      "part": 1,
+      "rows": 197545,
+      "bytes": 46735066,
+      "sha256": "20b5863bd28ec04695b016744b41578fd354c48da503dcdcdab46c27b62c886e"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-07_part01.csv",
+      "year": 2011,
+      "month": 7,
+      "part": 1,
+      "rows": 199763,
+      "bytes": 47353771,
+      "sha256": "e035a3cb86a24b6e47fb330176a35ff7b365d7e410424996d627eee1fcf815ef"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-08_part01.csv",
+      "year": 2011,
+      "month": 8,
+      "part": 1,
+      "rows": 199679,
+      "bytes": 47356590,
+      "sha256": "5cbe8dc712c78ee94b8ae5b9a836b6c17c53b1dc880bb239ab8e5b40da7f2641"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-09_part01.csv",
+      "year": 2011,
+      "month": 9,
+      "part": 1,
+      "rows": 182685,
+      "bytes": 43561983,
+      "sha256": "8aecf6d66b14f81c226c431d233dba5f6d543363284ec943a44ef489e1e785c6"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-10_part01.csv",
+      "year": 2011,
+      "month": 10,
+      "part": 1,
+      "rows": 196720,
+      "bytes": 47002906,
+      "sha256": "176ede9d2ef47c54d4f81a921b49ab252bb3b015b6dc3c1ebd1b033db329b3db"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-11_part01.csv",
+      "year": 2011,
+      "month": 11,
+      "part": 1,
+      "rows": 192055,
+      "bytes": 46078397,
+      "sha256": "3bdec7d32c9dbb525b35e99cc37587c71cbcbaffd60c389fe43c2d9cc7d8e375"
+    },
+    {
+      "path": "monthly_csv/2011/spl-checkouts_2011-12_part01.csv",
+      "year": 2011,
+      "month": 12,
+      "part": 1,
+      "rows": 190405,
+      "bytes": 45673901,
+      "sha256": "12b5ec057e839c2c4b683084a3ed66a0ac9719092d367192432060bbc62c62c0"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-01_part01.csv",
+      "year": 2012,
+      "month": 1,
+      "part": 1,
+      "rows": 194417,
+      "bytes": 46358352,
+      "sha256": "9e4276d1fc16bdeca3e104a6f1ee0cac5614ccded5ed40f63c1fac518e8907ab"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-02_part01.csv",
+      "year": 2012,
+      "month": 2,
+      "part": 1,
+      "rows": 194842,
+      "bytes": 46772326,
+      "sha256": "c3c4ec253ca9539b91855bed0012a622859fe93c8299ff16fe6b06f129eed84a"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-03_part01.csv",
+      "year": 2012,
+      "month": 3,
+      "part": 1,
+      "rows": 202683,
+      "bytes": 48609693,
+      "sha256": "18e6230d9fa06442628c057040185626a88efd3c85276c72b8a6f776ab2a2c5a"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-04_part01.csv",
+      "year": 2012,
+      "month": 4,
+      "part": 1,
+      "rows": 198624,
+      "bytes": 47728746,
+      "sha256": "da9668cf7ca060fb258e3fa418852c17ff7769025fc337cb43bb92a4650abb50"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-05_part01.csv",
+      "year": 2012,
+      "month": 5,
+      "part": 1,
+      "rows": 199363,
+      "bytes": 48125711,
+      "sha256": "7bf1d488d81ab295302c860d7a2131e977c231d96c9554984c4a6f4edd1ad462"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-06_part01.csv",
+      "year": 2012,
+      "month": 6,
+      "part": 1,
+      "rows": 204270,
+      "bytes": 49222754,
+      "sha256": "a84f930c2d1b0e3aa8e13af52b76e369359e469d51ad047e3f2f486f247d7fa0"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-07_part01.csv",
+      "year": 2012,
+      "month": 7,
+      "part": 1,
+      "rows": 209367,
+      "bytes": 50426122,
+      "sha256": "ad3d7b42fa0fd95908d5f15f9b06acfd3d889c024956ccb71141198ccb675901"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-08_part01.csv",
+      "year": 2012,
+      "month": 8,
+      "part": 1,
+      "rows": 197008,
+      "bytes": 47664460,
+      "sha256": "ab10daf88d69ef794b1b492353fabc65f6863fbf7e3dd00d2afb23e861205808"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-09_part01.csv",
+      "year": 2012,
+      "month": 9,
+      "part": 1,
+      "rows": 191446,
+      "bytes": 46533470,
+      "sha256": "350ed265729313e6980ee2f0325b1244f54e78ad37b6d87f54bf2bcbc74fa550"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-10_part01.csv",
+      "year": 2012,
+      "month": 10,
+      "part": 1,
+      "rows": 206352,
+      "bytes": 50324819,
+      "sha256": "c3ae8d727a211eb15d576486bb01f0df65f340dd507690c77395b82be9bf654c"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-11_part01.csv",
+      "year": 2012,
+      "month": 11,
+      "part": 1,
+      "rows": 202361,
+      "bytes": 49584226,
+      "sha256": "bd78c0d1c50199c61c4ad47353e8f315c27a2a94f61fd808d338c44342727024"
+    },
+    {
+      "path": "monthly_csv/2012/spl-checkouts_2012-12_part01.csv",
+      "year": 2012,
+      "month": 12,
+      "part": 1,
+      "rows": 197078,
+      "bytes": 48292878,
+      "sha256": "0652d91610d6815e8544f61bb09ae8da0d5be4b55c7bce5c3198e5069e28bfcc"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-01_part01.csv",
+      "year": 2013,
+      "month": 1,
+      "part": 1,
+      "rows": 214945,
+      "bytes": 52473762,
+      "sha256": "c9d6d59153525d9fc110e6e84128b68fdc3ad890c3ae3a9a72551f427acc9221"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-02_part01.csv",
+      "year": 2013,
+      "month": 2,
+      "part": 1,
+      "rows": 205094,
+      "bytes": 50544869,
+      "sha256": "a726dbbb1a7fb649a8118398cab6c46913c55033aedbeb6460e9011d8dabb9e3"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-03_part01.csv",
+      "year": 2013,
+      "month": 3,
+      "part": 1,
+      "rows": 212619,
+      "bytes": 52350130,
+      "sha256": "f30742e4dec134edabe5bd2333721ae869da6c309b7f6ef305f9367275917045"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-04_part01.csv",
+      "year": 2013,
+      "month": 4,
+      "part": 1,
+      "rows": 208869,
+      "bytes": 51407162,
+      "sha256": "5b136acace75415327c8ae8cc6e8070daed13d6ca5fd8caa61f43600480db889"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-05_part01.csv",
+      "year": 2013,
+      "month": 5,
+      "part": 1,
+      "rows": 203934,
+      "bytes": 50522578,
+      "sha256": "7ec6737f16b55921f1406ef7ac6dae8f2281dbb6d286de07f5709ef833d11383"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-06_part01.csv",
+      "year": 2013,
+      "month": 6,
+      "part": 1,
+      "rows": 208362,
+      "bytes": 51676857,
+      "sha256": "19ffda0af106b3620350dc21ece6ceaa65e89787f87c535cac4a882c336b3f60"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-07_part01.csv",
+      "year": 2013,
+      "month": 7,
+      "part": 1,
+      "rows": 214843,
+      "bytes": 53222282,
+      "sha256": "aa68b4f68be5c78c22b4dd4c1008f62f9691ac83b287b4f72c858779ad7418d3"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-08_part01.csv",
+      "year": 2013,
+      "month": 8,
+      "part": 1,
+      "rows": 213641,
+      "bytes": 53095822,
+      "sha256": "74a69eb72924d23e58d2b6ddf8d28af76b0193012e02999b76b966d6d07fbc21"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-09_part01.csv",
+      "year": 2013,
+      "month": 9,
+      "part": 1,
+      "rows": 207249,
+      "bytes": 51790394,
+      "sha256": "2e725c6809e278463ad286b4069f0e286530ce05bbfcc44d250ae12328052d8a"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-10_part01.csv",
+      "year": 2013,
+      "month": 10,
+      "part": 1,
+      "rows": 209512,
+      "bytes": 52673432,
+      "sha256": "199273d05a4e4f6b0293bbde579aeaa448431b9a98eebfb2057dc20602d6369f"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-11_part01.csv",
+      "year": 2013,
+      "month": 11,
+      "part": 1,
+      "rows": 210390,
+      "bytes": 52921370,
+      "sha256": "7dca19c35eb2cfd8d7171efa83fc41b3c18e311aa34c0ed8459eb66c5da3ec06"
+    },
+    {
+      "path": "monthly_csv/2013/spl-checkouts_2013-12_part01.csv",
+      "year": 2013,
+      "month": 12,
+      "part": 1,
+      "rows": 204300,
+      "bytes": 51370724,
+      "sha256": "d5b3ced8c4153f693c31aa1bd61a01c6842ef40051d2b41b4f0705d69a3f6832"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-01_part01.csv",
+      "year": 2014,
+      "month": 1,
+      "part": 1,
+      "rows": 217068,
+      "bytes": 54561740,
+      "sha256": "fd41781fe4182c5620295166b3d3ad3881cb415d2589f19ff358ae07ba55b4ca"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-02_part01.csv",
+      "year": 2014,
+      "month": 2,
+      "part": 1,
+      "rows": 207373,
+      "bytes": 52350019,
+      "sha256": "4240376da2e7786cb4453319f5b858171e74de7aaa4f0788286662d2561f7f6a"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-03_part01.csv",
+      "year": 2014,
+      "month": 3,
+      "part": 1,
+      "rows": 220323,
+      "bytes": 55528703,
+      "sha256": "a3b29e24ab9b3aa33ccc163a19c19e1e7ea0bf2f62d92e2d1f654c2ff755c539"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-04_part01.csv",
+      "year": 2014,
+      "month": 4,
+      "part": 1,
+      "rows": 213352,
+      "bytes": 53940254,
+      "sha256": "504d01810278dfc9dc61623978d387fadebb8d443871e7e9531fe7ab5e7ea431"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-05_part01.csv",
+      "year": 2014,
+      "month": 5,
+      "part": 1,
+      "rows": 213198,
+      "bytes": 53969367,
+      "sha256": "b47045187a9fa74128acaf00ba4bab5a98448d5801fbef9058ffdbe4d110236c"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-06_part01.csv",
+      "year": 2014,
+      "month": 6,
+      "part": 1,
+      "rows": 216235,
+      "bytes": 54776534,
+      "sha256": "2e785b19fdb8dbbc38d1fe03b233d6717531ffd0abbaa01a0250892c4231f29c"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-07_part01.csv",
+      "year": 2014,
+      "month": 7,
+      "part": 1,
+      "rows": 220376,
+      "bytes": 55858793,
+      "sha256": "06a4aa4f33ef42483d7250e8901b46f45b600d56bb9852c33290ae413eb64296"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-08_part01.csv",
+      "year": 2014,
+      "month": 8,
+      "part": 1,
+      "rows": 219927,
+      "bytes": 55803430,
+      "sha256": "e4f0daca132ad5150d56b17be19f700d48bce121723b31888cf5d2524cb6ad12"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-09_part01.csv",
+      "year": 2014,
+      "month": 9,
+      "part": 1,
+      "rows": 213799,
+      "bytes": 54144860,
+      "sha256": "3e2acda169d879b4090423d644a544269720e238d637d8e6a394adc25343b6d7"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-10_part01.csv",
+      "year": 2014,
+      "month": 10,
+      "part": 1,
+      "rows": 222793,
+      "bytes": 56124326,
+      "sha256": "2fb715d04c55bd8c7ea371d7f1ad50774a7feca10995020bc6a13417347c4a80"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-11_part01.csv",
+      "year": 2014,
+      "month": 11,
+      "part": 1,
+      "rows": 224271,
+      "bytes": 56381414,
+      "sha256": "dcb71a8c762fbd6339b38e17749fb15e198b579a40fe46aa9068a0bcab4eb826"
+    },
+    {
+      "path": "monthly_csv/2014/spl-checkouts_2014-12_part01.csv",
+      "year": 2014,
+      "month": 12,
+      "part": 1,
+      "rows": 220985,
+      "bytes": 55283562,
+      "sha256": "352d132a48a0be20a44ae5c4774441aaa87fdb9d9fb7e18a6be515679a0b1491"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-01_part01.csv",
+      "year": 2015,
+      "month": 1,
+      "part": 1,
+      "rows": 230884,
+      "bytes": 57924944,
+      "sha256": "a3dee43d66b669aa503f526c85626c47512962286b770c5a979f43ef70fdf298"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-02_part01.csv",
+      "year": 2015,
+      "month": 2,
+      "part": 1,
+      "rows": 221541,
+      "bytes": 55766974,
+      "sha256": "5d0cf86c42733d2d268250a4427d2ca95ed4de80a9e1a548d4311441a9cc8389"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-03_part01.csv",
+      "year": 2015,
+      "month": 3,
+      "part": 1,
+      "rows": 233156,
+      "bytes": 58396025,
+      "sha256": "1e22545bb790028757e8fcbbef891574585f5f12ed30cd782abfed9a3daa64f8"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-04_part01.csv",
+      "year": 2015,
+      "month": 4,
+      "part": 1,
+      "rows": 228027,
+      "bytes": 57306918,
+      "sha256": "a82bf6366e2f677ca9abfa21c29ba2b97ca6ad3133ca6ce2b5fb8ac84c7755d3"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-05_part01.csv",
+      "year": 2015,
+      "month": 5,
+      "part": 1,
+      "rows": 223097,
+      "bytes": 56213804,
+      "sha256": "237476c57b55c63d5c6ccff472fdaa9bdc56cf0eedf05923ea0c4843d9efdf51"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-06_part01.csv",
+      "year": 2015,
+      "month": 6,
+      "part": 1,
+      "rows": 216191,
+      "bytes": 54309375,
+      "sha256": "bece9f90c2be307ea498b7f64d03db3e5628e4ef3ab19a8ca6201687e8e30048"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-07_part01.csv",
+      "year": 2015,
+      "month": 7,
+      "part": 1,
+      "rows": 232411,
+      "bytes": 58888769,
+      "sha256": "fd7fb7d5347900bc6686e4117c7aa501d10adbefd6a90ba2c4fbf89f916a6d76"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-08_part01.csv",
+      "year": 2015,
+      "month": 8,
+      "part": 1,
+      "rows": 233927,
+      "bytes": 59103245,
+      "sha256": "50aafef0197272f05fd856a4c4b149f6ca318950e5c30559d5967a2adfdc6e24"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-09_part01.csv",
+      "year": 2015,
+      "month": 9,
+      "part": 1,
+      "rows": 228991,
+      "bytes": 58073833,
+      "sha256": "e52afa5674155f3a3d8d0290cf8c1aa56cf8e8bc61200545fd5c960fc0d1da61"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-10_part01.csv",
+      "year": 2015,
+      "month": 10,
+      "part": 1,
+      "rows": 229477,
+      "bytes": 58452641,
+      "sha256": "461b3fe48fb2605e37a1318e7b25279ed2e1d7ac8b041d8f6f34e4791e1e09d2"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-11_part01.csv",
+      "year": 2015,
+      "month": 11,
+      "part": 1,
+      "rows": 228076,
+      "bytes": 58015565,
+      "sha256": "7a923a155f8bc0291f9501dac783c55f1ab11af1522646ea6719627ec2d05a1b"
+    },
+    {
+      "path": "monthly_csv/2015/spl-checkouts_2015-12_part01.csv",
+      "year": 2015,
+      "month": 12,
+      "part": 1,
+      "rows": 223753,
+      "bytes": 56618855,
+      "sha256": "3d8bd8c9fc8d9cc432334f4737fe096e15adcaa1655619809fe5aed3f796f12f"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-01_part01.csv",
+      "year": 2016,
+      "month": 1,
+      "part": 1,
+      "rows": 236248,
+      "bytes": 59603812,
+      "sha256": "d79a0f8f223b1ea660c13a90b850a5bb1817a8deb134b55759d289c743467f94"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-02_part01.csv",
+      "year": 2016,
+      "month": 2,
+      "part": 1,
+      "rows": 230238,
+      "bytes": 58095855,
+      "sha256": "f8ae5d1de83eccfdf84584afe8c9fe84569660ebafe3b4a1e047da25199eaf46"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-03_part01.csv",
+      "year": 2016,
+      "month": 3,
+      "part": 1,
+      "rows": 236372,
+      "bytes": 59622355,
+      "sha256": "b61bdfb6b335292b88d8cc30b881675769a392d641684452ebc2771405e085cb"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-04_part01.csv",
+      "year": 2016,
+      "month": 4,
+      "part": 1,
+      "rows": 231344,
+      "bytes": 58340687,
+      "sha256": "b2e60ed715249cdef53090b2af66be53c93c98ca764abacdcf352795419473d8"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-05_part01.csv",
+      "year": 2016,
+      "month": 5,
+      "part": 1,
+      "rows": 230764,
+      "bytes": 58091288,
+      "sha256": "4895f11a3ca7431c3988e2e49db6989ac9714caaf1a4d83374fecb219800fe64"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-06_part01.csv",
+      "year": 2016,
+      "month": 6,
+      "part": 1,
+      "rows": 231244,
+      "bytes": 58623773,
+      "sha256": "a25308acbcfc9cd41ba5c70317048c168006d10668900584ae2b60a7edc00521"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-07_part01.csv",
+      "year": 2016,
+      "month": 7,
+      "part": 1,
+      "rows": 235743,
+      "bytes": 59926266,
+      "sha256": "9743e2af1a72b79ebed32ec292790a4413801efc0ac6d228e719a9c849d5dfcc"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-08_part01.csv",
+      "year": 2016,
+      "month": 8,
+      "part": 1,
+      "rows": 234958,
+      "bytes": 59616076,
+      "sha256": "367c3d19cd64828d3d9263f7fd821a992c824125025137c6fb1e682b2f9221c5"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-09_part01.csv",
+      "year": 2016,
+      "month": 9,
+      "part": 1,
+      "rows": 229199,
+      "bytes": 58406553,
+      "sha256": "eee326ce156df0b07ea3761c0bd7336b3891bb50fbf9fb16f78a123e1294dada"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-10_part01.csv",
+      "year": 2016,
+      "month": 10,
+      "part": 1,
+      "rows": 232970,
+      "bytes": 59658433,
+      "sha256": "6700ff5a6d58f0a47b39798dbe37dacb7e2c52bd9a34271ac7ac865f71009d46"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-11_part01.csv",
+      "year": 2016,
+      "month": 11,
+      "part": 1,
+      "rows": 229985,
+      "bytes": 58992724,
+      "sha256": "a426f114dce2042fbbe2381320c66948ec4acb543bfaefe6fd635cacf7704dbb"
+    },
+    {
+      "path": "monthly_csv/2016/spl-checkouts_2016-12_part01.csv",
+      "year": 2016,
+      "month": 12,
+      "part": 1,
+      "rows": 228254,
+      "bytes": 58380593,
+      "sha256": "fe93d8048f817456a5705fba7d0be6102433a830018df7993cd100f6cb0479d7"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-01_part01.csv",
+      "year": 2017,
+      "month": 1,
+      "part": 1,
+      "rows": 238381,
+      "bytes": 60677672,
+      "sha256": "6fc5363a910c86c53ba9105d3d1223e7a4f030a6588c0953b81fce7073a644f7"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-02_part01.csv",
+      "year": 2017,
+      "month": 2,
+      "part": 1,
+      "rows": 229329,
+      "bytes": 58683325,
+      "sha256": "c28fdf975cbbf8ef1c815a2fba4b8ab4e7b1cd9bb2118c6e1e88733948748094"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-03_part01.csv",
+      "year": 2017,
+      "month": 3,
+      "part": 1,
+      "rows": 239524,
+      "bytes": 61222565,
+      "sha256": "d54f8d6cbfa7975d2db4f2748e3ef26f8caefdbf10233abf08bbb6f961893e33"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-04_part01.csv",
+      "year": 2017,
+      "month": 4,
+      "part": 1,
+      "rows": 236289,
+      "bytes": 60398915,
+      "sha256": "4318e1cd691bc078d4ca7cd17a0f20bdc4080eae2b1c94679fce66acb364ec4d"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-05_part01.csv",
+      "year": 2017,
+      "month": 5,
+      "part": 1,
+      "rows": 232428,
+      "bytes": 59283731,
+      "sha256": "928340382df1a48aef63cc209cd3c8edb54ed5e0195d8db1f8e3e00854ee1057"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-06_part01.csv",
+      "year": 2017,
+      "month": 6,
+      "part": 1,
+      "rows": 233005,
+      "bytes": 59648192,
+      "sha256": "b68befca9c7bdda20ae5616faa6246070db8125f1340a7150e57cc0030ef7ba0"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-07_part01.csv",
+      "year": 2017,
+      "month": 7,
+      "part": 1,
+      "rows": 241853,
+      "bytes": 61908011,
+      "sha256": "d7d71909bb52149ac6c128b53d7f8df24018aa80333ce22089318458d09b8013"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-08_part01.csv",
+      "year": 2017,
+      "month": 8,
+      "part": 1,
+      "rows": 240376,
+      "bytes": 61623981,
+      "sha256": "af0b7abf466b26cb59684f176e6e27aaa4c835017e4e1992d92688caeb151aeb"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-09_part01.csv",
+      "year": 2017,
+      "month": 9,
+      "part": 1,
+      "rows": 233144,
+      "bytes": 59644215,
+      "sha256": "fd2a668573e53424d3ee979343dab37cbf1b10cc4a14954795e218240f2ac982"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-10_part01.csv",
+      "year": 2017,
+      "month": 10,
+      "part": 1,
+      "rows": 236296,
+      "bytes": 60519573,
+      "sha256": "b544805bdd43103acac1841d515d6d14154cf17132cfdd7b124ccbc48ecca6c1"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-11_part01.csv",
+      "year": 2017,
+      "month": 11,
+      "part": 1,
+      "rows": 230747,
+      "bytes": 57923534,
+      "sha256": "d7eab5c06eafb7995b5d0fa6b3ddb1d099b9b52160f6d7215a63971a7bc619c7"
+    },
+    {
+      "path": "monthly_csv/2017/spl-checkouts_2017-12_part01.csv",
+      "year": 2017,
+      "month": 12,
+      "part": 1,
+      "rows": 229061,
+      "bytes": 57024762,
+      "sha256": "9bcaeeefb27158574164c9717ba55dbd8dd0122456716886c13454ad984f6dab"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-01_part01.csv",
+      "year": 2018,
+      "month": 1,
+      "part": 1,
+      "rows": 243666,
+      "bytes": 60727091,
+      "sha256": "a557f2fe89939b8519dec9084e75c9eaf84a0a139db885364dd41266e7360435"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-02_part01.csv",
+      "year": 2018,
+      "month": 2,
+      "part": 1,
+      "rows": 231955,
+      "bytes": 58227276,
+      "sha256": "a5d11723001e731e331adb89dabee94e0cb7b318ff4eee561f551a71512c4242"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-03_part01.csv",
+      "year": 2018,
+      "month": 3,
+      "part": 1,
+      "rows": 241937,
+      "bytes": 60475250,
+      "sha256": "7359721fe2783c4e720ef2155a43b2fd8c081f7e907b3e4bb1835f894e559d7f"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-04_part01.csv",
+      "year": 2018,
+      "month": 4,
+      "part": 1,
+      "rows": 226216,
+      "bytes": 58434338,
+      "sha256": "5c70b356a3fe6be94aea7b687fffdd378c8ead5ce27a0f7a535f77b144d24b74"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-05_part01.csv",
+      "year": 2018,
+      "month": 5,
+      "part": 1,
+      "rows": 215835,
+      "bytes": 56558298,
+      "sha256": "29c0e82d228007631f4c835fa93b2a212149be274f24009af6e93a22b3a1083f"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-06_part01.csv",
+      "year": 2018,
+      "month": 6,
+      "part": 1,
+      "rows": 215935,
+      "bytes": 57391108,
+      "sha256": "9d9c8f48580b7395c6c4741ef2076a34033bdc8860edb57d297f92d393f5bb45"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-07_part01.csv",
+      "year": 2018,
+      "month": 7,
+      "part": 1,
+      "rows": 220657,
+      "bytes": 58424678,
+      "sha256": "62b112e25cc6b542fa6d3b82f157115b1024b523060e038f09d548879c9b799d"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-08_part01.csv",
+      "year": 2018,
+      "month": 8,
+      "part": 1,
+      "rows": 221943,
+      "bytes": 58806577,
+      "sha256": "ced4a12499132af640cf2274ccadfe105929a494e5b2c5ca60aee5e16a689e14"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-09_part01.csv",
+      "year": 2018,
+      "month": 9,
+      "part": 1,
+      "rows": 212353,
+      "bytes": 56391174,
+      "sha256": "a2ad33795d765d81536d8f4cf39bb56a9b5f9fd428849e54b908f49ce675c56e"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-10_part01.csv",
+      "year": 2018,
+      "month": 10,
+      "part": 1,
+      "rows": 215544,
+      "bytes": 57488797,
+      "sha256": "707f6c494bf05145271fac31a9b1d95c44163d998bd5d040a015bc087257b1c6"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-11_part01.csv",
+      "year": 2018,
+      "month": 11,
+      "part": 1,
+      "rows": 210616,
+      "bytes": 56291059,
+      "sha256": "4a23dada3d67b3375fd6d8d0c19f329c36099feae87fc8e35bcff0098e0c8d36"
+    },
+    {
+      "path": "monthly_csv/2018/spl-checkouts_2018-12_part01.csv",
+      "year": 2018,
+      "month": 12,
+      "part": 1,
+      "rows": 208441,
+      "bytes": 55605420,
+      "sha256": "ac43537f35f44c799df5a2302d130aaf5905d7fa6f2f8f23d1dca4811c23a82e"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-01_part01.csv",
+      "year": 2019,
+      "month": 1,
+      "part": 1,
+      "rows": 222334,
+      "bytes": 59226285,
+      "sha256": "801ef176aba202d40025ba34d97af2b76bb23730780d791f5018802bfd3ae6cf"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-02_part01.csv",
+      "year": 2019,
+      "month": 2,
+      "part": 1,
+      "rows": 211012,
+      "bytes": 56354919,
+      "sha256": "0ce9444c5008b84d862d0a912a7f2a8bd9977ce225ade31c6efeb58fd38bfbf1"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-03_part01.csv",
+      "year": 2019,
+      "month": 3,
+      "part": 1,
+      "rows": 216738,
+      "bytes": 57862422,
+      "sha256": "b4cda2181298bcf01235462f60e4c2e0631d51fdc2af02692f6ec73cbb092635"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-04_part01.csv",
+      "year": 2019,
+      "month": 4,
+      "part": 1,
+      "rows": 216180,
+      "bytes": 57675733,
+      "sha256": "e80840d6afcc0e180c8e769a220a7499f6f52ef907a34517e1f9e3ed5482af43"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-05_part01.csv",
+      "year": 2019,
+      "month": 5,
+      "part": 1,
+      "rows": 212659,
+      "bytes": 56724604,
+      "sha256": "452e11b2a2675da8924a8659bcdf624b3af599d0708cf47d0f54c73e5b25fd8f"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-06_part01.csv",
+      "year": 2019,
+      "month": 6,
+      "part": 1,
+      "rows": 215340,
+      "bytes": 57470478,
+      "sha256": "83d2b3cc5841b1914a47759b381080824f6a919b30ad78784a555e14d680d03c"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-07_part01.csv",
+      "year": 2019,
+      "month": 7,
+      "part": 1,
+      "rows": 224291,
+      "bytes": 59878555,
+      "sha256": "43e19c89b8cb57402b4f6b586db8530386d665642e0846b65b5a0a66f5136993"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-08_part01.csv",
+      "year": 2019,
+      "month": 8,
+      "part": 1,
+      "rows": 222068,
+      "bytes": 59289332,
+      "sha256": "b2cbd4c62b2a9e2e70e86bf6089bbf64e21e1a601c1d1695f154eda632b3fe65"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-09_part01.csv",
+      "year": 2019,
+      "month": 9,
+      "part": 1,
+      "rows": 213783,
+      "bytes": 57149509,
+      "sha256": "882698fd933e091d49222b21518d9f235ed217dc2998cc769411e21d97b79fba"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-10_part01.csv",
+      "year": 2019,
+      "month": 10,
+      "part": 1,
+      "rows": 214673,
+      "bytes": 57659050,
+      "sha256": "dcb3452e11fd7f21889bd8d136740ccfa7287f25685ad5bfa66f8cf125e259e3"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-11_part01.csv",
+      "year": 2019,
+      "month": 11,
+      "part": 1,
+      "rows": 211946,
+      "bytes": 57076631,
+      "sha256": "8da5c0095c35fa6da3d7f6706642d814681cebffa5b722264fa07f60fafdf5a6"
+    },
+    {
+      "path": "monthly_csv/2019/spl-checkouts_2019-12_part01.csv",
+      "year": 2019,
+      "month": 12,
+      "part": 1,
+      "rows": 207977,
+      "bytes": 55755132,
+      "sha256": "ffbe8793e190ec71318b46b98e4128ce0adf91b30db57a7fd2fb2d32dfbba2a8"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-01_part01.csv",
+      "year": 2020,
+      "month": 1,
+      "part": 1,
+      "rows": 221475,
+      "bytes": 59376775,
+      "sha256": "ed28616ec34aa07ef4ba972ed7a915afba572cee8fa0f5ffefa7a5ebecc2e84c"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-02_part01.csv",
+      "year": 2020,
+      "month": 2,
+      "part": 1,
+      "rows": 217269,
+      "bytes": 58405785,
+      "sha256": "c2af1080fe2b4ae27405cd40bbbc8aaa2ddb5670fb18d1722815f0a1b18432ff"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-03_part01.csv",
+      "year": 2020,
+      "month": 3,
+      "part": 1,
+      "rows": 201077,
+      "bytes": 53000138,
+      "sha256": "b77b4ed294435821c8e2c29e9f25799b13cbd2b60a060879b591b4fef195e647"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-04_part01.csv",
+      "year": 2020,
+      "month": 4,
+      "part": 1,
+      "rows": 93671,
+      "bytes": 17639738,
+      "sha256": "296df99389bb20a57013910721ce5cab4dd79522d37dff908cfd66a9609aa2f6"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-05_part01.csv",
+      "year": 2020,
+      "month": 5,
+      "part": 1,
+      "rows": 95583,
+      "bytes": 18023762,
+      "sha256": "76a4b24032ef44fd6b1f7f2f31419beb053b8248cae1a19e5b7decc61092f109"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-06_part01.csv",
+      "year": 2020,
+      "month": 6,
+      "part": 1,
+      "rows": 93498,
+      "bytes": 17660345,
+      "sha256": "ca013ee9014c9290023697659a59600a4c14ea85bc5ca43469bacf31354d5831"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-07_part01.csv",
+      "year": 2020,
+      "month": 7,
+      "part": 1,
+      "rows": 95322,
+      "bytes": 18026380,
+      "sha256": "21aecbdb835d7cfe8984a5fa1a68a4ffa5cb314e0a074f78946ac9ee04cfc04d"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-08_part01.csv",
+      "year": 2020,
+      "month": 8,
+      "part": 1,
+      "rows": 104330,
+      "bytes": 21223169,
+      "sha256": "83a6e53bb3299152a63e9086c94b9820807574de4c46ade0068f04f80e64de72"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-09_part01.csv",
+      "year": 2020,
+      "month": 9,
+      "part": 1,
+      "rows": 140879,
+      "bytes": 33059908,
+      "sha256": "ddb9e454526088e2d15c4495d4d4527423956ded58ef2e26272af26705417164"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-10_part01.csv",
+      "year": 2020,
+      "month": 10,
+      "part": 1,
+      "rows": 150493,
+      "bytes": 36366211,
+      "sha256": "a7feda6397c81aa30cc2d60806a641e6dee8f3adce6bc1ad8133eab6ff1918d8"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-11_part01.csv",
+      "year": 2020,
+      "month": 11,
+      "part": 1,
+      "rows": 148670,
+      "bytes": 35972262,
+      "sha256": "7cd30b9dffe6f34da6c6fe3d99fa92c95eef46a4aac8105017bf1d7d3358f1c2"
+    },
+    {
+      "path": "monthly_csv/2020/spl-checkouts_2020-12_part01.csv",
+      "year": 2020,
+      "month": 12,
+      "part": 1,
+      "rows": 159109,
+      "bytes": 39246215,
+      "sha256": "8d6c03d583cdb7c667004cc41f3e4fd80e4723afafa437466e449f8186e5e9e8"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-01_part01.csv",
+      "year": 2021,
+      "month": 1,
+      "part": 1,
+      "rows": 169174,
+      "bytes": 42153208,
+      "sha256": "3ee1d71c5ab5de4a6931c8f160a31c94ca5357d1923eb08d7649b86dbbbd31e6"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-02_part01.csv",
+      "year": 2021,
+      "month": 2,
+      "part": 1,
+      "rows": 167343,
+      "bytes": 42021627,
+      "sha256": "88391ff65963c6e8ca0d90c862e03ede9ffee5e96292d3f147f8d1aebd58e7e9"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-03_part01.csv",
+      "year": 2021,
+      "month": 3,
+      "part": 1,
+      "rows": 175707,
+      "bytes": 44575465,
+      "sha256": "9b1af7c180b76539641453e4a7a359dccb5527204331444317d7c581697a4445"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-04_part01.csv",
+      "year": 2021,
+      "month": 4,
+      "part": 1,
+      "rows": 170287,
+      "bytes": 42823669,
+      "sha256": "25838a60a8b945b38885583d98d329fbe6cb112e6e35411211c445cb2c5126dc"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-05_part01.csv",
+      "year": 2021,
+      "month": 5,
+      "part": 1,
+      "rows": 173942,
+      "bytes": 43672398,
+      "sha256": "549cb14be03ca1a3bb3d9fd7e1432323a8d7628e409799efe63572518c6bd918"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-06_part01.csv",
+      "year": 2021,
+      "month": 6,
+      "part": 1,
+      "rows": 183889,
+      "bytes": 47157010,
+      "sha256": "6931a61377976e643a1a95a5ea30141b7db5de38f7ac83f5f9fd94644732c241"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-07_part01.csv",
+      "year": 2021,
+      "month": 7,
+      "part": 1,
+      "rows": 195536,
+      "bytes": 50874275,
+      "sha256": "d46f1c5681f809a6e0e36ae8c710138de7b4d684747323315a2d549c90ffed08"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-08_part01.csv",
+      "year": 2021,
+      "month": 8,
+      "part": 1,
+      "rows": 201108,
+      "bytes": 52456954,
+      "sha256": "c264902d00e1e1db932bbd1ed308d8fafc5cbbbff868db5b7853ad0e320e77da"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-09_part01.csv",
+      "year": 2021,
+      "month": 9,
+      "part": 1,
+      "rows": 202389,
+      "bytes": 53112466,
+      "sha256": "7ba1bcfc33fe587ba1932e0b422e236ce57782c731a6e87d2a70289619dea600"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-10_part01.csv",
+      "year": 2021,
+      "month": 10,
+      "part": 1,
+      "rows": 204381,
+      "bytes": 53826168,
+      "sha256": "3ed0606cbd578bb2a6c8244716edf6fd419d2af39b5937b2af4cf743c8b86a8f"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-11_part01.csv",
+      "year": 2021,
+      "month": 11,
+      "part": 1,
+      "rows": 204892,
+      "bytes": 53911290,
+      "sha256": "e25e009f935711099bc7618ced252cf950c11a317d318980da9951451385ac13"
+    },
+    {
+      "path": "monthly_csv/2021/spl-checkouts_2021-12_part01.csv",
+      "year": 2021,
+      "month": 12,
+      "part": 1,
+      "rows": 193624,
+      "bytes": 50563720,
+      "sha256": "15045de769f471d98c483ac048bd1c18b38709014d09a5d2e505fae3db2bdb5e"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-01_part01.csv",
+      "year": 2022,
+      "month": 1,
+      "part": 1,
+      "rows": 214711,
+      "bytes": 56376346,
+      "sha256": "686b452772ab0b88fe8a021fbe3f95a97a63b017525a43548c3940898cbf4296"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-02_part01.csv",
+      "year": 2022,
+      "month": 2,
+      "part": 1,
+      "rows": 201839,
+      "bytes": 52968659,
+      "sha256": "34c7dbfe6010467639f036430c9b7c81916bf15062d0f2232d03f7ad1dc40c68"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-03_part01.csv",
+      "year": 2022,
+      "month": 3,
+      "part": 1,
+      "rows": 211560,
+      "bytes": 55558587,
+      "sha256": "380dcc961656b5defde890a1f782b2c91d3761b8907c8623f0540063a72e7620"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-04_part01.csv",
+      "year": 2022,
+      "month": 4,
+      "part": 1,
+      "rows": 205087,
+      "bytes": 53988374,
+      "sha256": "c48b5804e6d2be8e78ab7cb3e30ed7857673941c7f9cb5a676085e61bfd14c0c"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-05_part01.csv",
+      "year": 2022,
+      "month": 5,
+      "part": 1,
+      "rows": 211941,
+      "bytes": 59662687,
+      "sha256": "1c765a07041e37c51a485504b3c45ee54f8fb18d6c621d46397d269202e90ceb"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-06_part01.csv",
+      "year": 2022,
+      "month": 6,
+      "part": 1,
+      "rows": 212740,
+      "bytes": 60042317,
+      "sha256": "f4f009983683969591c67d714bbd34f8e5ad5e712dcbc2b2ac719c70d68163c5"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-07_part01.csv",
+      "year": 2022,
+      "month": 7,
+      "part": 1,
+      "rows": 211456,
+      "bytes": 59479016,
+      "sha256": "6c87414e43ef498e9b03f469e8e2d109cae766934da066e4fdef1bed7a5de1e8"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-08_part01.csv",
+      "year": 2022,
+      "month": 8,
+      "part": 1,
+      "rows": 218985,
+      "bytes": 61822223,
+      "sha256": "7efb718030ec67d972374211936561ce128c5024f9ba2f03136d9371cdf57e2a"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-09_part01.csv",
+      "year": 2022,
+      "month": 9,
+      "part": 1,
+      "rows": 212256,
+      "bytes": 59845430,
+      "sha256": "d9729c6115b5d1700011bfed6534f61cb8c7f70f33c631eb48f22157327c9d5e"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-10_part01.csv",
+      "year": 2022,
+      "month": 10,
+      "part": 1,
+      "rows": 212696,
+      "bytes": 60028555,
+      "sha256": "b347437d4d2e76dccc5743ab8e7cf89dccedee7f97e0edf5275d589d0e2739d3"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-11_part01.csv",
+      "year": 2022,
+      "month": 11,
+      "part": 1,
+      "rows": 210727,
+      "bytes": 59446569,
+      "sha256": "20813ca0b8ae1f3778f85ce7ae495e874df741b9998bc94439c1301be79a90e7"
+    },
+    {
+      "path": "monthly_csv/2022/spl-checkouts_2022-12_part01.csv",
+      "year": 2022,
+      "month": 12,
+      "part": 1,
+      "rows": 207510,
+      "bytes": 58166606,
+      "sha256": "f82e1024fc4ff7bdaffb4601402bc1fe2cbe5280ba8ee2b2840dc0acd2f6f37a"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-01_part01.csv",
+      "year": 2023,
+      "month": 1,
+      "part": 1,
+      "rows": 225506,
+      "bytes": 63429037,
+      "sha256": "826c3bc7eae01d9d6bc53e8783fce3d03c977df7407d9362d72b0adee181c620"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-02_part01.csv",
+      "year": 2023,
+      "month": 2,
+      "part": 1,
+      "rows": 216099,
+      "bytes": 60763214,
+      "sha256": "ebeb29df6f625b0bd0346fb38b47cc970148f938e0c006567370c1bbeefe56e0"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-03_part01.csv",
+      "year": 2023,
+      "month": 3,
+      "part": 1,
+      "rows": 224905,
+      "bytes": 62316724,
+      "sha256": "d6d066a4bf3bb5de9da812004e01ada614614d33c758d50ba14fba0b6fa7c55d"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-04_part01.csv",
+      "year": 2023,
+      "month": 4,
+      "part": 1,
+      "rows": 221640,
+      "bytes": 61661232,
+      "sha256": "dddd5a7edc298061b7465b3b2d90361273aed4fd1d6a6d4305f9048fcdabf73c"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-05_part01.csv",
+      "year": 2023,
+      "month": 5,
+      "part": 1,
+      "rows": 218276,
+      "bytes": 60603816,
+      "sha256": "dcb81a168f41ea8115781361cba55ceba3a1ddf30c86849e6af28df7510bfa43"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-06_part01.csv",
+      "year": 2023,
+      "month": 6,
+      "part": 1,
+      "rows": 221678,
+      "bytes": 61751004,
+      "sha256": "df48b62e89bc27fac24e34e19b4a890892b4021b468c20e0808a4d07b7fd5d55"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-07_part01.csv",
+      "year": 2023,
+      "month": 7,
+      "part": 1,
+      "rows": 227177,
+      "bytes": 63391547,
+      "sha256": "1dc01f98984bc78b3ba7e94b1e68113491968f3170ef7c98227c8b9f989c616c"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-08_part01.csv",
+      "year": 2023,
+      "month": 8,
+      "part": 1,
+      "rows": 230095,
+      "bytes": 64206857,
+      "sha256": "113f389aa5868d693880f0d561172cedcf5bc8ebaba2bfd617f7edd6a5455c7b"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-09_part01.csv",
+      "year": 2023,
+      "month": 9,
+      "part": 1,
+      "rows": 223495,
+      "bytes": 62173409,
+      "sha256": "cd5af8d3e07e8e985f7bf0c260615c5f323c4ef8d636a3dcfe66089d9ee638bb"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-10_part01.csv",
+      "year": 2023,
+      "month": 10,
+      "part": 1,
+      "rows": 225265,
+      "bytes": 62848087,
+      "sha256": "f8409e87f062659b09ce73137525132fe7dfa6d4fa16deb883a403a63fd0d5e0"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-11_part01.csv",
+      "year": 2023,
+      "month": 11,
+      "part": 1,
+      "rows": 220542,
+      "bytes": 61346413,
+      "sha256": "ccccf6d8e51c6e6752155c29651aeb6f9ff766579424a5c90b1e97a1f2796d2e"
+    },
+    {
+      "path": "monthly_csv/2023/spl-checkouts_2023-12_part01.csv",
+      "year": 2023,
+      "month": 12,
+      "part": 1,
+      "rows": 221348,
+      "bytes": 61418434,
+      "sha256": "d05760749e7b1cc4e7c2e817283800331cadea1558db0fac7ae9f0c4fa791e3a"
+    },
+    {
+      "path": "monthly_csv/2024/spl-checkouts_2024-01_part01.csv",
+      "year": 2024,
+      "month": 1,
+      "part": 1,
+      "rows": 236014,
+      "bytes": 65455909,
+      "sha256": "e62fde4404429c64280b9af8ba69e3078ae5f6f171c8ad56f9bcfad7f30280b8"
+    },
+    {
+      "path": "monthly_csv/2024/spl-checkouts_2024-02_part01.csv",
+      "year": 2024,
+      "month": 2,
+      "part": 1,
+      "rows": 229178,
+      "bytes": 63564234,
+      "sha256": "c6d4944205bf302f7c602f83cedb217cc5f724e79c499166400f3c8a1107be81"
+    },
+    {
+      "path": "monthly_csv/2024/spl-checkouts_2024-03_part01.csv",
+      "year": 2024,
+      "month": 3,
+      "part": 1,
+      "rows": 233312,
+      "bytes": 64791841,
+      "sha256": "25a9edc13ecf7f28c6f11599d48cea300e998924be819e1e0f7f616f8ff03323"
+    },
+    {
+      "path": "monthly_csv/2024/spl-checkouts_2024-04_part01.csv",
+      "year": 2024,
+      "month": 4,
+      "part": 1,
+      "rows": 229448,
+      "bytes": 63634781,
+      "sha256": "2a5e7c024e425f822be9e9811e0b3c9b45b9112bf3ac70b8cdfcef64c9f3d07c"
+    },
+    {
+      "path": "monthly_csv/2024/spl-checkouts_2024-07_part01.csv",
+      "year": 2024,
+      "month": 7,
+      "part": 1,
+      "rows": 170695,
+      "bytes": 44593824,
+      "sha256": "b5061b338474a5c4b858630fc67a7e4c6e4e5caa28fc5f4b8352de8d387549f8"
+    },
+    {
+      "path": "monthly_csv/2024/spl-checkouts_2024-08_part01.csv",
+      "year": 2024,
+      "month": 8,
+      "part": 1,
+      "rows": 212250,
+      "bytes": 58481372,
+      "sha256": "83a86c3bd4fd9b2eea65abe7d2f5776689651372ae770b530388ee09f565da5b"
+    },
+    {
+      "path": "monthly_csv/2024/spl-checkouts_2024-09_part01.csv",
+      "year": 2024,
+      "month": 9,
+      "part": 1,
+      "rows": 218468,
+      "bytes": 60277950,
+      "sha256": "69e2aec7217c1059fbfd326972481e57adf69448abb6f2438d4e9c6cdedcad00"
+    },
+    {
+      "path": "monthly_csv/2024/spl-checkouts_2024-10_part01.csv",
+      "year": 2024,
+      "month": 10,
+      "part": 1,
+      "rows": 222844,
+      "bytes": 61701852,
+      "sha256": "78a91567fddea3ee681a60d29d0d3f8c582e27073d732448d7dde6521d4b9ad8"
+    },
+    {
+      "path": "monthly_csv/2024/spl-checkouts_2024-11_part01.csv",
+      "year": 2024,
+      "month": 11,
+      "part": 1,
+      "rows": 225056,
+      "bytes": 62443711,
+      "sha256": "c3716bc7203168f3ab6554e04a2d710d422a84154e7de44831fc30784330bc3a"
+    },
+    {
+      "path": "monthly_csv/2024/spl-checkouts_2024-12_part01.csv",
+      "year": 2024,
+      "month": 12,
+      "part": 1,
+      "rows": 225004,
+      "bytes": 62071279,
+      "sha256": "99aaf0c4092a8486815de09321be392dbb1d384121463d39f8d6d2be1c611960"
+    },
+    {
+      "path": "monthly_csv/2025/spl-checkouts_2025-01_part01.csv",
+      "year": 2025,
+      "month": 1,
+      "part": 1,
+      "rows": 237902,
+      "bytes": 65764653,
+      "sha256": "eb115df0500ce5395eb40d49ca84efb5069eda1dd9eb8806407f3b0368d867aa"
+    },
+    {
+      "path": "monthly_csv/2025/spl-checkouts_2025-02_part01.csv",
+      "year": 2025,
+      "month": 2,
+      "part": 1,
+      "rows": 229339,
+      "bytes": 62935590,
+      "sha256": "46541173354259832fb35b173612e45aabf029cff02d41dcac5c1c6e5929ccb4"
+    }
+  ]
+}
