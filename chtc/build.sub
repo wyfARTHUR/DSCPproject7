@@ -1,0 +1,12 @@
+# Run from the repository root: condor_submit -i chtc/build.sub
+log = chtc-build.log
+transfer_input_files = chtc
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_output_files = ""
++IsBuildJob = true
+requirements = (HasCHTCStaging == true)
+request_cpus = 8
+request_memory = 16GB
+request_disk = 30GB
+queue

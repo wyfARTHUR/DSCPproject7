@@ -6,6 +6,27 @@ tracked directly in Git under `data/monthly_csv/YYYY/`, so a normal `git clone`
 or `git pull` retrieves the data without extracting ZIPs or installing Git LFS.
 Yearly ZIPs are also available in [GitHub Releases](https://github.com/wyfARTHUR/DSCPproject7/releases/tag/spl-monthly-2005-2025-v1).
 
+## R analysis and CHTC/HTCondor workflow
+
+The analysis pipeline now covers yearly CSV-to-Parquet preparation, cross-year
+work matching and manual match audit, parallel exponential share-decay fitting,
+book fixed-effect comparisons, pandemic sensitivity, and plots.
+See **[CHTC.md](CHTC.md)** for the Chinese CHTC setup guide using the course's
+Apptainer and DAGMan patterns. Statistical choices, output definitions and tests
+are documented in **[ANALYSIS.md](ANALYSIS.md)**.
+
+```sh
+cp config/chtc.example.json config/chtc.json
+# First build/check the R container and fill its real URI; follow CHTC.md.
+python3 chtc/workflow.py prepare --run-dir chtc_runs/run1
+cd chtc_runs/run1
+condor_submit_dag prepare.dag
+# When preparation finishes, complete match_review.tsv; then generate fit.dag.
+```
+
+The real container path and resource requests must match your environment. This repository does
+not automatically submit jobs or treat unreviewed matches as final results.
+
 ## Dataset and project size requirement
 
 - Source filename: `spl-monthly-checkouts_2005-2025.csv`.
@@ -27,8 +48,9 @@ source. March-December 2025 are also absent. These gaps are retained; no empty
 months or synthetic records were added. All other months from January 2006
 through February 2025 are present.
 
-The source was supplied as a local file. Its original download URL and license
-were not supplied or independently verified. Add the original dataset citation
+The source was supplied as a local file; the group proposal identifies Zenodo
+as its source. The exact original download URL and license were not supplied or
+independently verified. Add the original dataset citation
 and applicable terms before submitting the project report.
 
 ## Download data

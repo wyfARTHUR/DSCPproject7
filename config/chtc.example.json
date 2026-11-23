@@ -1,0 +1,16 @@
+{
+  "container_image": "file:///staging/REPLACE_WITH_YOUR_ALLOCATED_PATH/dscp-r.sif",
+  "require_staging": true,
+  "year_cpus": 2,
+  "year_memory": "8GB",
+  "year_disk": "8GB",
+  "merge_cpus": 2,
+  "merge_memory": "16GB",
+  "merge_disk": "16GB",
+  "fit_cpus": 1,
+  "fit_memory": "4GB",
+  "fit_disk": "8GB",
+  "compare_cpus": 2,
+  "compare_memory": "8GB",
+  "compare_disk": "16GB"
+}

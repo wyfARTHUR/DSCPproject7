@@ -1,0 +1,24 @@
+Bootstrap: docker
+From: rocker/r2u:24.04
+
+%files
+    chtc/container_check.R /opt/dscp/container_check.R
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install -y --no-install-recommends \
+        r-cran-data.table r-cran-arrow r-cran-stringi r-cran-digest \
+        r-cran-jsonlite r-cran-ggplot2 python3 ca-certificates tar gzip
+    apt-get clean
+
+%environment
+    export LC_ALL=C.UTF-8
+    export OPENBLAS_NUM_THREADS=1
+    export OMP_NUM_THREADS=1
+
+%test
+    Rscript /opt/dscp/container_check.R
+
+%labels
+    Purpose DSCP checkout decay analysis

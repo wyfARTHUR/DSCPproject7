@@ -1,2 +1,10 @@
 # Preserve the original CSV bytes on Windows and Linux.
 data/monthly_csv/**/*.csv -text -diff
+*.R text eol=lf
+*.sh text eol=lf
+*.sbatch text eol=lf
+*.tsv text eol=lf
+*.env.example text eol=lf
+*.sub text eol=lf
+*.def text eol=lf
+*.py text eol=lf

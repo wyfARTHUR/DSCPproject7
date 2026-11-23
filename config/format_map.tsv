@@ -1,0 +1,6 @@
+materialtype	usageclass	format
+BOOK	PHYSICAL	print
+REGPRINT	PHYSICAL	print
+LARGEPRINT	PHYSICAL	print
+EBOOK	DIGITAL	ebook
+AUDIOBOOK	DIGITAL	digital_audio

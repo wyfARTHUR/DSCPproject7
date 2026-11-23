@@ -5,3 +5,11 @@
 *.partial
 *.tmp
 __pycache__/
+.Rlib/
+.Rhistory
+.RData
+analysis_output/
+tests/.tmp/
+config/chtc.json
+chtc_runs/
+*.sif
