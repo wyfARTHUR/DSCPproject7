@@ -1,7 +1,7 @@
-# Large datasets are distributed through Releases.
+# Only the prepared monthly CSVs are tracked; ZIPs remain in Releases.
 *.csv
+!data/monthly_csv/**/*.csv
 *.zip
 *.partial
 *.tmp
-data/monthly_csv/
 __pycache__/

@@ -1,0 +1,2 @@
+# Preserve the original CSV bytes on Windows and Linux.
+data/monthly_csv/**/*.csv -text -diff

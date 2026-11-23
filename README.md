@@ -1,15 +1,17 @@
 # DSCPproject7
 
 SPL checkout data preparation for the DSCP group project. The supplied source CSV
-is partitioned by `checkoutyear` and `checkoutmonth`, then packaged into one ZIP
-per year for distribution through [GitHub Releases](https://github.com/wyfARTHUR/DSCPproject7/releases/tag/spl-monthly-2005-2025-v1).
+is partitioned by `checkoutyear` and `checkoutmonth`. The monthly CSV files are
+tracked directly in Git under `data/monthly_csv/YYYY/`, so a normal `git clone`
+or `git pull` retrieves the data without extracting ZIPs or installing Git LFS.
+Yearly ZIPs are also available in [GitHub Releases](https://github.com/wyfARTHUR/DSCPproject7/releases/tag/spl-monthly-2005-2025-v1).
 
 ## Dataset and project size requirement
 
 - Source filename: `spl-monthly-checkouts_2005-2025.csv`.
 - Source size: **11,362,453,085 bytes** (11.36 GB, 10.58 GiB).
 - Data rows, excluding the header: **45,821,586**. Columns: **12**.
-- Partitions: **228 monthly CSVs**, distributed as **20 yearly ZIPs**.
+- Partitions: **228 monthly CSVs** tracked directly in Git, also available as **20 yearly ZIPs**.
 - Monthly CSV sizes: **17.64 to 65.76 MB**.
 - Total ZIP download size: **3,338,096,958 bytes** (3.34 GB).
 
@@ -31,14 +33,44 @@ and applicable terms before submitting the project report.
 
 ## Download data
 
-Clone the small code/metadata repository:
+On a remote Linux machine, clone the repository to get all monthly CSVs:
 
 ```sh
 git clone https://github.com/wyfARTHUR/DSCPproject7.git
 cd DSCPproject7
+find data/monthly_csv -type f -name '*.csv' | wc -l
 ```
 
-Download and extract one year using Python 3.9+ (standard library only):
+The count should be **228** after the full dataset is available. The CSV working
+files occupy about **11.36 GB**, plus the space required by Git's compressed
+object database. No ZIP extraction, Python dependency, or Git LFS step is needed
+for this method. Keep enough disk space for both the CSV files and `.git`.
+
+If you cloned this repository earlier, get the CSVs with:
+
+```sh
+cd DSCPproject7
+git pull --ff-only origin main
+```
+
+For example, January 2023 is stored at:
+
+```text
+data/monthly_csv/2023/spl-checkouts_2023-01_part01.csv
+```
+
+Optionally verify every monthly CSV against the manifest with Python 3.9+:
+
+```sh
+python3 scripts/verify_git_data.py
+```
+
+CSV line endings and content bytes are preserved by `.gitattributes` on Windows
+and Linux. All files are ordinary Git blobs, not LFS pointers.
+
+### Alternative: download yearly ZIPs
+
+To download and extract one yearly archive using Python 3.9+ (standard library only):
 
 ```sh
 python scripts/download_data.py --year 2023 --output data_download --extract
@@ -47,13 +79,12 @@ python scripts/download_data.py --year 2023 --output data_download --extract
 The downloader validates the ZIP size and SHA-256, then validates every extracted
 CSV. Each ZIP contains `monthly_csv/YYYY/*.csv` and `year_manifest.json`.
 Use the ZIP links below for manual downloads. `SHA256SUMS.txt` covers all ZIPs.
-The automatically generated GitHub **Source code** archives contain code and
-metadata; use the named `spl-checkouts_YYYY.zip` assets for the dataset.
+Use the named `spl-checkouts_YYYY.zip` assets when downloading yearly archives.
 
 For R, a monthly file can be read with:
 
 ```r
-d <- read.csv("data_download/monthly_csv/2023/spl-checkouts_2023-01_part01.csv", na.strings = "NA")
+d <- read.csv("data/monthly_csv/2023/spl-checkouts_2023-01_part01.csv", na.strings = "NA")
 ```
 
 The partition format supports independent jobs by month or year. On CHTC, arrange
@@ -129,6 +160,6 @@ Source SHA-256:
 8ca3036ed886660b01e6b3c93bf376c2131e2c385d29347ea73199749195872e
 ```
 
-Large CSV/ZIP files are kept out of Git history and distributed as release
+Monthly CSV files are tracked directly in Git. ZIPs remain available as release
 assets. GitHub documents its release asset limits
 [here](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases).
