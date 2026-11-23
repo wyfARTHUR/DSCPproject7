@@ -16,10 +16,11 @@ Apptainer and DAGMan patterns. Statistical choices, output definitions and tests
 are documented in **[ANALYSIS.md](ANALYSIS.md)**.
 
 ```sh
-cp config/chtc.example.json config/chtc.json
-# First build/check the R container and fill its real URI; follow CHTC.md.
-python3 chtc/workflow.py prepare --run-dir chtc_runs/run1
-cd chtc_runs/run1
+# First build/check the R container; follow CHTC.md.
+cp config/chtc.env.example config/chtc.env
+# Fill the real container URI in chtc.env, then prepare the supplied templates.
+bash chtc/prepare.sh prepare chtc_runs/run_R1
+cd chtc_runs/run_R1
 condor_submit_dag prepare.dag
 # When preparation finishes, complete match_review.tsv; then generate fit.dag.
 ```
@@ -81,10 +82,10 @@ For example, January 2023 is stored at:
 data/monthly_csv/2023/spl-checkouts_2023-01_part01.csv
 ```
 
-Optionally verify every monthly CSV against the manifest with Python 3.9+:
+Optionally verify every monthly CSV against the manifest with R:
 
 ```sh
-python3 scripts/verify_git_data.py
+Rscript scripts/verify_git_data.R
 ```
 
 CSV line endings and content bytes are preserved by `.gitattributes` on Windows
@@ -92,10 +93,10 @@ and Linux. All files are ordinary Git blobs, not LFS pointers.
 
 ### Alternative: download yearly ZIPs
 
-To download and extract one yearly archive using Python 3.9+ (standard library only):
+To download and extract one yearly archive using R:
 
 ```sh
-python scripts/download_data.py --year 2023 --output data_download --extract
+Rscript scripts/download_data.R --year 2023 --output data_download --extract true
 ```
 
 The downloader validates the ZIP size and SHA-256, then validates every extracted
@@ -141,18 +142,12 @@ before exit, as directed by the supplied project specification.
 
 MB and GB above use decimal units. GiB uses 1,073,741,824 bytes.
 
-## Reproduce preparation
+## Historical source splitting
 
-Python 3.9+ is sufficient; no third-party packages are required. Use a new output
-directory with adequate disk space for the uncompressed partitions and archives.
-
-```sh
-python scripts/prepare_data.py all --source /path/to/spl-monthly-checkouts_2005-2025.csv --output prepared_data
-```
-
-Stages can also be invoked separately with `split`, `verify`, and `package`.
-The default package step uses three compression threads. This is data preparation;
-the project's statistical parallel computation is a separate subsequent task.
+The original one-time lossless splitting is already complete. Its historical
+`scripts/prepare_data.py` is retained for provenance; it is excluded from the
+current job bundle and is not needed to run the R analysis. Current downloading,
+verification, processing, modeling, plotting and job logic are written in R.
 
 The parser handles quoted fields, escaped quotes, embedded newlines, and UTF-8.
 It validates all 12 columns and every year/month, while retaining each original

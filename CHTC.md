@@ -1,25 +1,22 @@
-# 在本课程的 CHTC 环境运行
+# 用 R 在本课程的 CHTC 环境运行
 
-这套入口对应课程的 **HTCondor**，使用 `condor_submit`、`queue ... from ...` 和
-`condor_submit_dag`，不使用 `sbatch`。
-参考：[本学期课程表](https://pages.stat.wisc.edu/~jgillett/DSCP/schedule.html)、
-[课程 CHTC 示例](https://pages.stat.wisc.edu/~jgillett/DSCP/CHTC/)。
-R 方法、人工匹配规则和结果定义见 [ANALYSIS.md](ANALYSIS.md)。
+数据下载、校验、清洗、匹配、模型、绘图、作业逻辑和中间结果打包均使用 **R**。
+CHTC 必需的 `.sub`、`.dag` 和两个 Shell 启动/准备脚本保留；当前分析流程不需要运行 Python。
+调度方式对应[本学期课件](https://pages.stat.wisc.edu/~jgillett/DSCP/schedule.html)及其
+[CHTC 示例](https://pages.stat.wisc.edu/~jgillett/DSCP/CHTC/)。方法说明见 [ANALYSIS.md](ANALYSIS.md)。
 
 ## 1. 更新代码
-
-登录 `learn.chtc.wisc.edu`，进入已经克隆的仓库：
 
 ```bash
 cd DSCPproject7
 git pull --ff-only origin main
 ```
 
-CSV 仍直接保存在 Git 中，可以普通 `pull`。但本工作流**不会把整个仓库、`.git` 或全部 CSV
-传给每个计算节点**。年度作业会在执行节点下载本年 ZIP，校验并解压月度 CSV；处理后删除输入，
-只返回 Parquet 中间结果和诊断信息。这样也避免在每个作业中重复克隆大型仓库。
+CSV 仍可用普通 Git 获取。但计算作业不会传输整个仓库、`.git` 或全部 CSV。
+每个年度作业在执行节点用 R 下载本年的 ZIP、校验并解压月度 CSV，处理后删除原始输入，
+只返回指定中间结果。已经拆好的数据不需要重新拆分。
 
-如果你还没在 `learn` 克隆，且只想保留代码和小型清单，可用这个可选的轻量克隆：
+若尚未克隆且只想在 `learn` 保留代码与清单，可以轻量克隆：
 
 ```bash
 git clone --filter=blob:none --sparse https://github.com/wyfARTHUR/DSCPproject7.git
@@ -28,189 +25,169 @@ git sparse-checkout set --no-cone '/R/' '/scripts/' '/config/' '/chtc/' '/tests/
     '/data/*.json' '/*.md' '/.gitattributes' '/.gitignore'
 ```
 
-后续仍可用 `git pull` 更新选中的路径。普通全量克隆也能运行；只是会额外保存约 11.36 GB 的 CSV。
+## 2. 一次性构建 R 容器
 
-## 2. 一次性准备 R 容器
+`learn` 不需要安装 R。R 在作业容器中运行，与课程的 `calling_R_python_torch/R` 示例方式一致。
+项目提供了 `chtc/dscp-r.def`，包含 `data.table`、`arrow`、`stringi`、`digest`、`jsonlite`、
+`ggplot2` 和用于测试的 `zip` 包，并在构建时检查包加载与 Parquet 读写。
 
-CHTC 节点不能假设预装了 R。课程的 R 示例也是通过 `.sif` 容器提供 R。
-本项目还需要 `data.table`、`arrow`、`stringi`、`digest`、`jsonlite` 和 `ggplot2`；
-**不要直接假定课程的 tidyverse/FITSio 容器包含这些包**。
-
-仓库提供 `chtc/dscp-r.def` 和交互构建作业。它从 `rocker/r2u:24.04` 安装 R 二进制包，
-并在构建时检查包加载、Python 和 Parquet 读写。参见
-[CHTC R 指南](https://chtc.cs.wisc.edu/uw-research-computing/r-jobs) 和
-[容器构建指南](https://chtc.cs.wisc.edu/uw-research-computing/apptainer-htc/)。
-
-在**仓库根目录**提交交互构建作业：
+在仓库根目录提交交互构建作业：
 
 ```bash
 condor_submit -i chtc/build.sub
 ```
 
-进入计算节点后运行：
+进入计算节点后：
 
 ```bash
 apptainer build dscp-r.sif chtc/dscp-r.def
 apptainer exec --cleanenv dscp-r.sif Rscript /opt/dscp/container_check.R
 ```
 
-成功后，**在退出交互作业前**将镜像复制到你们已经获分配、能够写入的 `/staging` 路径。
-以下是占位符，必须换成真实路径：
+成功后，在退出交互作业**之前**，复制镜像到你们已分配、可写入的 staging 路径。
+下列路径是占位符，必须替换：
 
 ```bash
-cp dscp-r.sif /staging/YOUR_ALLOCATED_PATH/dscp-r-v1.sif
-sha256sum /staging/YOUR_ALLOCATED_PATH/dscp-r-v1.sif
+cp dscp-r.sif /staging/YOUR_ALLOCATED_PATH/dscp-r-v2.sif
+sha256sum /staging/YOUR_ALLOCATED_PATH/dscp-r-v2.sif
 exit
 ```
 
-构建提交文件关闭了大文件自动返回，所以不会把新镜像复制回 `learn`；请务必先完成上述复制。
-不要在登录节点运行 `apptainer build`。镜像构建成功后保存它的 SHA-256 和包版本输出，
-同一轮分析不要替换镜像内容。
+构建作业关闭了镜像自动返回，所以务必先完成复制。不要在登录节点构建容器。
+保存镜像 SHA-256 和包版本输出，同一轮分析不要替换镜像内容。
+参见 [CHTC R 指南](https://chtc.cs.wisc.edu/uw-research-computing/r-jobs)和
+[Apptainer 构建指南](https://chtc.cs.wisc.edu/uw-research-computing/apptainer-htc/)。
 
-本地测试没有构建 Linux 镜像，也没有登录 CHTC。必须先在你们的实际环境完成容器检查和单作业试跑。
-
-## 3. 配置资源与生成提交文件
-
-```bash
-cp config/chtc.example.json config/chtc.json
-```
-
-编辑 `config/chtc.json`，把 `container_image` 改成真实的镜像 URI，例如：
-
-```json
-"container_image": "file:///staging/YOUR_ALLOCATED_PATH/dscp-r-v1.sif"
-```
-
-`file:///staging/` 对应的作业配置了 `HasCHTCStaging` 要求。各阶段的 CPU、内存和磁盘请求可以修改；
-示例值是初始请求，**不是 CHTC 上的实测资源需求**。R/Arrow 线程数会遵守每个作业申请的 CPU 数。
-
-分析日期、分片数量和统计参数在 `config/analysis.json`，格式映射在 `config/format_map.tsv`。
-默认分析 2010 年起的数据、排除 2024 年 5–6 月，并生成 32 个拟合分片。
-
-生成第一阶段文件：
+## 3. 填写镜像路径，准备默认提交文件
 
 ```bash
-python3 chtc/workflow.py prepare --run-dir chtc_runs/run1
+cp config/chtc.env.example config/chtc.env
 ```
 
-这个命令只生成小型代码包、作业参数表、`.sub` 和 `.dag`，**不会提交任何作业**，也不需要登录节点有 R。
-`code.tar.gz` 不包含原始 CSV、`.git`、R 安装目录或 `.sif`。
-
-## 4. 先试跑一个年度作业，再运行准备阶段
+用编辑器把 `DSCP_CONTAINER_IMAGE` 改成真实路径，例如：
 
 ```bash
-cd chtc_runs/run1
+DSCP_CONTAINER_IMAGE=file:///staging/YOUR_ALLOCATED_PATH/dscp-r-v2.sif
+```
+
+仓库已附默认的 2010–2025 年、32 个拟合分片的提交模板，因此 `learn` 不需要运行 R 或 Python 来生成它们。
+日期范围和统计参数在 `config/analysis.json`。若需要改变日期或分片数，先在有 R 的本地电脑/交互计算环境运行：
+
+```bash
+Rscript chtc/make_templates.R
+```
+
+再把更新的配置和 `chtc/templates/` 同步到 Git。模板与配置不一致时，准备脚本会停止。
+
+这一版使用 RDS 传输包，建议使用新的运行目录，不与旧版 `.tar.gz` 中间结果混用：
+
+```bash
+bash chtc/prepare.sh prepare chtc_runs/run_R1
+```
+
+这一步只用标准 Shell、`tar` 和 `sha256sum` 打包少量代码、替换镜像路径、建立日志目录，
+**不会提交作业**。代码包排除原始 CSV、`.git`、R 安装目录、镜像和历史 Python 工具。
+
+## 4. 先试跑，再提交年度处理与匹配
+
+```bash
+cd chtc_runs/run_R1
 condor_submit pilot.sub
 condor_q
 ```
 
-检查 `logs/` 下的 `.out`、`.err`、`.log`，确认容器、GitHub 下载、CSV 校验和 Parquet 写入都成功。
-试跑成功后再提交完整准备阶段：
+检查 `logs/` 的 `.out`、`.err`、`.log`，确认镜像、下载、CSV 校验和 Parquet 写入成功。
+模板里的资源请求是初始建议，不是 CHTC 实测值；如需调整，编辑本运行目录 `.sub` 中的
+`request_cpus`、`request_memory`、`request_disk`。
+
+然后提交完整准备阶段：
 
 ```bash
 condor_submit_dag prepare.dag
 condor_q -dag -nobatch
 ```
 
-`prepare.dag` 的结构为：
+流程为：
 
 ```text
-year.sub: queue year from years.txt   (2010–2025，各年独立)
-                    |
-                    v
-merge.sub: 合并跨年作品、生成拟合分片和人工审核表
+year.sub: queue year from years.txt
+                  |
+                  v
+merge.sub: 跨年匹配、审核表和拟合分片
 ```
 
-依赖要求前一批全部成功，合并才会启动。年度作业只返回 `year-YYYY.tar.gz`，不返回下载的 CSV/ZIP。
-合并作业返回：
+年度作业返回 `year-YYYY.rds`，不会返回原始 CSV/ZIP。
+合并返回 `match_review.tsv`、`match_candidates.tsv`、`review-bundle.rds` 和 `shard-NNNN-input.rds`。
+RDS 包以原始字节保存指定文件，并验证每个成员的 SHA-256；不同作业不依赖共享工作目录。
 
-- `match_review.tsv`：需要人工填写的审核表。
-- `match_candidates.tsv`：审核样本的规范化标题、作者、格式和原始示例。
-- `review-bundle.tar.gz`：完整匹配元数据、分母和准备阶段诊断。
-- `shard-NNNN-input.tar.gz`：每个拟合任务需要的完整跨年时间序列。
+## 5. 人工审核与修正
 
-这些文件都在 `chtc_runs/run1/`，不是共享的计算节点工作目录。作业之间通过显式文件传输衔接。
+编辑运行目录的 `match_review.tsv`，填写 `decision=accept/reject`、实际组员 `reviewer` 和 `notes`。
+不要删除行、修改作品 ID 或审核签名。抽查包括最多 200 个自动匹配作品和所有人工别名作品，
+不代表每本书都经过人工核验。
 
-## 5. 人工审核与别名修正
-
-编辑 `chtc_runs/run1/match_review.tsv`，只填写：
-
-- `decision`：`accept` 或 `reject`。
-- `reviewer`：实际审核的组员姓名。
-- `notes`：判断依据。
-
-默认审核最多 200 个自动匹配作品，以及所有人工别名合并的作品。这是抽样审核，
-不表示每本书均已人工核验。`reject` 排除该作品的全部格式，但不会改变该格式全体书籍的月度分母。
-不要删除审核行、改作品 ID 或改 `review_signature`。
-
-需要合并不同的规范化标题/作者，或排除错误记录时，在仓库根目录编辑
-`config/match_overrides.tsv`。从 `match_candidates.tsv` 复制精确的 `title_norm` 和 `creator_norm`；
-要合并的键使用相同的稳定 `work_id`，例如 `manual_book_001`。`include` 为 `TRUE` 或 `FALSE`。
-更多标题可以在有 R 的本地/交互计算环境用 `scripts/find_work.R` 查询完整目录。
-
-修改别名后，只需重建合并阶段，再审核、再拟合：
+需要修正匹配时，在仓库根目录编辑 `config/match_overrides.tsv`。
+从 `match_candidates.tsv` 复制精确的规范化标题、作者；要合并的键填写同一个 `work_id`，
+`include` 为 `TRUE` 或 `FALSE`。然后重新提交合并阶段：
 
 ```bash
 # 从仓库根目录运行
-python3 chtc/workflow.py merge --run-dir chtc_runs/run1
-cd chtc_runs/run1
+bash chtc/prepare.sh merge chtc_runs/run_R1
+cd chtc_runs/run_R1
 condor_submit_dag merge.dag
 ```
 
-不会重新下载所有原始数据或重跑年度任务。已审核且作品成员未改变的决定会保留；
-成员变化时需要重新审核。
+无须重新处理年度 CSV。成员未改变的已有审核决定会保留；成员改变的作品需要重新审核。
+其他统计代码或配置改变时，应使用新运行目录。
 
-## 6. 提交拟合与最终比较
+## 6. R 审核检查、并行拟合和最终结果
 
 审核完成后，从仓库根目录运行：
 
 ```bash
-python3 chtc/workflow.py fit --run-dir chtc_runs/run1
-cd chtc_runs/run1
+bash chtc/prepare.sh fit chtc_runs/run_R1
+cd chtc_runs/run_R1
 condor_submit_dag fit.dag
 ```
 
-审核未完成、审核 ID 不一致或缺少分片时，生成器会停止。拟合任务还会再次在 R 中核验审核和版本。
-
 ```text
-fit.sub: queue shard from shards.txt  (默认 32 个任务)
-                    |
-                    v
-compare.sub: 固定效应比较、敏感性分析和图表
+audit.sub: 单个 R 作业检查人工审核
+                  |
+                  v
+fit.sub: queue shard from shards.txt
+                  |
+                  v
+compare.sub: 比较、敏感性分析和图表
 ```
 
-最终返回 `results.tar.gz`：
+审核不完整时第一个 R 作业失败，后续拟合不会启动。每个拟合分片和最终合并还会核验审核与版本。
+最终图表和表格直接返回到 `results/run/results/`，无须用 Python 或 R 解压。
+资源/包版本记录在 `results/run/metrics/`，作业状态在 `results/run/job_status/`。
+R 堆内存不是进程 RSS，真实 CHTC 用量还应查看 HTCondor `.log` 或 `condor_history JOB_ID -long`。
+
+探索模式只用于明确接受未审核匹配的流程检查：
 
 ```bash
-mkdir -p results
-tar -xzf results.tar.gz -C results
-```
-
-图表和统计表在 `results/run/results/`；任务时间、R 堆内存和 R/package session 信息在
-`results/run/metrics/`，各作业状态在 `results/run/job_status/`。HTCondor 的实际内存/磁盘用量还应查看
-相应 `.log` 或 `condor_history JOB_ID -long`；R 堆内存不是进程 RSS。
-
-## 7. 探索模式和失败恢复
-
-仅用于检查流程、明确接受未审核匹配的探索版本时，用新的运行目录：
-
-```bash
-python3 chtc/workflow.py all --run-dir chtc_runs/exploratory1 --allow-unreviewed
-cd chtc_runs/exploratory1
+bash chtc/prepare.sh all chtc_runs/exploratory_R1 --allow-unreviewed
+cd chtc_runs/exploratory_R1
 condor_submit_dag all.dag
 ```
 
-探索输出会标记 `PRELIMINARY_UNREVIEWED`，程序不会伪造审核姓名或自动填写 `accept`。
-正式比较仍应完成人工审核，再生成并提交 `fit.dag`。
+输出会标记 `PRELIMINARY_UNREVIEWED`，不会伪造组员审核。正式比较仍需完成审核并重跑拟合。
+每个运行目录冻结代码、配置和镜像 URI；运行中不要更新其文件。更改审核后应重跑全部拟合。
+失败作业会返回诊断，非零退出会阻止后续 DAG 节点；不要将失败/旧作业的结果作为新结论。
 
-每个运行目录冻结代码、分析配置和容器 URI。修改统计代码、分析配置或数据清单后应使用新目录；
-只有别名表可以用 `merge` 在同一目录重建。不要在 DAG 运行中重新生成它的提交文件。
-改变审核决定后必须重跑所有拟合分片。
+## 7. 本地 R 测试
 
-失败时查看 `.err` 和 `.log`，不要把仍在运行/失败的作业当成成功结果。作业失败也会返回指定的诊断包，
-非零退出会阻止后续 DAG 节点；修复问题后可按照 DAGMan 的 rescue 机制恢复。
-容器构建、实际调度和真实资源用量需要在 CHTC 试跑，当前本地测试没有代替这些步骤。
+```bash
+Rscript tests/test_models.R
+Rscript tests/test_pipeline.R
+Rscript tests/test_chtc.R
+```
 
-参考：[CHTC 文件传输](https://chtc.cs.wisc.edu/uw-research-computing/htc-job-file-transfer/)、
-[CHTC staging](https://chtc.cs.wisc.edu/uw-research-computing/file-avail-largedata/)、
-[CHTC DAGMan](https://chtc.cs.wisc.edu/uw-research-computing/htc/dagman-workflows/)。
+最后一个测试使用小型模拟数据和独立沙盒，实际运行 R 年度处理、RDS 文件传输、审核门槛、拟合和图表。
+它会调用短 Shell 准备脚本，但不调用 Python、HTCondor 或 Apptainer，不提交真实作业。
+Linux 镜像构建和真实 CHTC 调度仍需按上述步骤试跑。
+
+参考：[文件传输](https://chtc.cs.wisc.edu/uw-research-computing/htc-job-file-transfer/)、
+[DAGMan](https://chtc.cs.wisc.edu/uw-research-computing/htc/dagman-workflows/)。

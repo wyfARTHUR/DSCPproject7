@@ -9,7 +9,7 @@ From: rocker/r2u:24.04
     apt-get update
     apt-get install -y --no-install-recommends \
         r-cran-data.table r-cran-arrow r-cran-stringi r-cran-digest \
-        r-cran-jsonlite r-cran-ggplot2 python3 ca-certificates tar gzip
+        r-cran-jsonlite r-cran-ggplot2 r-cran-zip ca-certificates tar gzip
     apt-get clean
 
 %environment

@@ -9,4 +9,4 @@ export DSCP_TRANSFER_DIR="$transfer_dir"
 export OPENBLAS_NUM_THREADS=1
 export MKL_NUM_THREADS=1
 export OMP_NUM_THREADS="${DSCP_CPUS:-1}"
-python3 "$DSCP_JOB_SANDBOX/chtc/run_job.py" "$@"
+Rscript --vanilla "$DSCP_JOB_SANDBOX/chtc/run_job.R" "$@"

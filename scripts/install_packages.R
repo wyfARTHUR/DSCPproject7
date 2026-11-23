@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-packages <- c('data.table', 'arrow', 'stringi', 'digest', 'jsonlite', 'ggplot2')
+packages <- c('data.table', 'arrow', 'stringi', 'digest', 'jsonlite', 'ggplot2', 'zip')
 project_lib <- Sys.getenv('DSCP_R_LIB', '.Rlib')
 dir.create(project_lib, recursive = TRUE, showWarnings = FALSE)
 .libPaths(c(project_lib, .libPaths()))

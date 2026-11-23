@@ -1,0 +1,17 @@
+universe = container
+container_image = @CONTAINER_IMAGE@
+executable = job.sh
+arguments = fit $(shard) @ALLOW_UNREVIEWED@
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = code.tar.gz, shard-$(shard)-input.rds, match_review.tsv
+transfer_output_files = fit-shard-$(shard).rds
+request_cpus = 1
+request_memory = 4GB
+request_disk = 8GB
+environment = "DSCP_CPUS=1 DSCP_JOB_ID=$(Cluster).$(Process)"
+log = logs/fit_$(Cluster).log
+output = logs/fit_$(Cluster)_$(Process).out
+error = logs/fit_$(Cluster)_$(Process).err
+requirements = (HasCHTCStaging == true)
+queue shard from shards.txt

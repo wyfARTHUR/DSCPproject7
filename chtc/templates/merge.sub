@@ -1,0 +1,17 @@
+universe = container
+container_image = @CONTAINER_IMAGE@
+executable = job.sh
+arguments = merge 0 @ALLOW_UNREVIEWED@
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = code.tar.gz, year-2010.rds, year-2011.rds, year-2012.rds, year-2013.rds, year-2014.rds, year-2015.rds, year-2016.rds, year-2017.rds, year-2018.rds, year-2019.rds, year-2020.rds, year-2021.rds, year-2022.rds, year-2023.rds, year-2024.rds, year-2025.rds
+transfer_output_files = review-bundle.rds, match_review.tsv, match_candidates.tsv, shard-0001-input.rds, shard-0002-input.rds, shard-0003-input.rds, shard-0004-input.rds, shard-0005-input.rds, shard-0006-input.rds, shard-0007-input.rds, shard-0008-input.rds, shard-0009-input.rds, shard-0010-input.rds, shard-0011-input.rds, shard-0012-input.rds, shard-0013-input.rds, shard-0014-input.rds, shard-0015-input.rds, shard-0016-input.rds, shard-0017-input.rds, shard-0018-input.rds, shard-0019-input.rds, shard-0020-input.rds, shard-0021-input.rds, shard-0022-input.rds, shard-0023-input.rds, shard-0024-input.rds, shard-0025-input.rds, shard-0026-input.rds, shard-0027-input.rds, shard-0028-input.rds, shard-0029-input.rds, shard-0030-input.rds, shard-0031-input.rds, shard-0032-input.rds
+request_cpus = 2
+request_memory = 16GB
+request_disk = 16GB
+environment = "DSCP_CPUS=2 DSCP_JOB_ID=$(Cluster).$(Process)"
+log = logs/merge_$(Cluster).log
+output = logs/merge_$(Cluster)_$(Process).out
+error = logs/merge_$(Cluster)_$(Process).err
+requirements = (HasCHTCStaging == true)
+queue

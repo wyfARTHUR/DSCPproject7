@@ -100,7 +100,7 @@ R 堆内存不等于进程 RSS；实际 CHTC 资源用量需要查看 HTCondor `
 ```bash
 Rscript tests/test_models.R
 Rscript tests/test_pipeline.R
-python3 tests/test_chtc.py
+Rscript tests/test_chtc.R
 ```
 
 模型测试涵盖已知半衰期、真实日历间隔、峰后最少月份、跨年峰值、零值、非衰减与边界拟合。

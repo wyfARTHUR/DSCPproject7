@@ -8,3 +8,7 @@ data/monthly_csv/**/*.csv -text -diff
 *.sub text eol=lf
 *.def text eol=lf
 *.py text eol=lf
+*.json text eol=lf
+*.txt text eol=lf
+*.sha256 text eol=lf
+*.dag text eol=lf
