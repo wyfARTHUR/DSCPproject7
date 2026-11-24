@@ -6,7 +6,8 @@ Sys.setenv(R_LIBS = paste(.libPaths(), collapse = .Platform$path.sep))
 suppressPackageStartupMessages(library(data.table))
 root <- normalizePath('.', winslash = '/')
 dir.create('tests/.tmp', recursive = TRUE, showWarnings = FALSE)
-fixture <- normalizePath(tempfile('chtc-R-', tmpdir = 'tests/.tmp'), winslash = '/', mustWork = FALSE)
+# Build an absolute path explicitly: normalizePath() leaves a not-yet-existing path relative on macOS/Linux.
+fixture <- file.path(root, 'tests/.tmp', basename(tempfile('chtc-R-')))
 project <- file.path(fixture, 'source')
 dir.create(project, recursive = TRUE)
 for (folder in c('R', 'scripts', 'chtc', 'config')) {

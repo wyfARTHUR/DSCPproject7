@@ -124,6 +124,16 @@ stopifnot(atlas[format == 'print', post_peak_months] == 35L)
 stopifnot(atlas[format == 'digital_audio', post_peak_months] == 34L)
 stopifnot(atlas[format == 'print', post_peak_span] == 36L)
 stopifnot(!any(fits$work_id %in% c(reject_id, map[title_norm == 'excluded work', work_id])))
+# Absent source rows after first appearance are zero-filled, not dropped.
+beta_print <- fits[scenario == 'main' & work_id == map[title_norm == 'beta', work_id] & format == 'print']
+stopifnot(beta_print$post_peak_months == 35L, beta_print$zero_post_peak_months == 1L)
+zero_tail <- fits[scenario == 'main' & work_id == map[title_norm == 'zero tail', work_id]]
+stopifnot(nrow(zero_tail) == 3L, all(zero_tail[format != 'digital_audio', zero_post_peak_months] == 22L))
+# Absent source rows after first appearance are zero-filled, not dropped.
+beta_print <- fits[scenario == 'main' & work_id == map[title_norm == 'beta', work_id] & format == 'print']
+stopifnot(beta_print$post_peak_months == 35L, beta_print$zero_post_peak_months == 1L)
+zero_tail <- fits[scenario == 'main' & work_id == map[title_norm == 'zero tail', work_id]]
+stopifnot(nrow(zero_tail) == 3L, all(zero_tail[format != 'digital_audio', zero_post_peak_months] == 22L))
 stopifnot(any(fits$status == 'non_decaying'), any(fits$zero_post_peak_months > 0))
 stopifnot(all(fits$audit_status == 'audit_sample_complete'))
 comparison <- fread(file.path(out, 'results', 'format_comparison.tsv'))

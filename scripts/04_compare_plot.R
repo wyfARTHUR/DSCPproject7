@@ -72,6 +72,7 @@ if (nrow(examples)) {
   observed <- rbindlist(lapply(shard_ids, function(s) rbindlist(lapply(ctx$years, function(year) {
     read_pq(file.path(ctx$out, 'shards', sprintf('%04d', s), paste0(year, '.parquet')))[work_id %in% examples$work_id]
   }))))[format_total > 0]
+  observed <- complete_zero_months(observed, totals)
   observed[, `:=`(share = checkouts/format_total, date = as.Date(paste0(period, '-01')))]
   curves <- merge(observed, fits[scenario == 'main' & status == 'decaying', .(work_id, format, peak_month, beta)],
                   by = c('work_id', 'format'))
@@ -106,7 +107,7 @@ write_json(list(analysis_status = audit$status, audited_works = audit$reviewed,
                 method = 'Unweighted nonlinear least squares exponential share decay; log-half-life book fixed effects; book-clustered CR1 covariance',
                 limitations = c('Observational comparisons; no causal effect of format is identified',
                   'Inventory, licensing, availability and left/right censoring are not controlled',
-                  'Absent work-month rows remain missing; they are not converted to zero',
+                  'Absent work-month rows after first appearance are treated as zero checkouts (SPL lists only titles checked out that month)',
                   'Fixed-effect comparisons condition on estimable decaying print and digital fits',
                   'Cluster intervals do not propagate uncertainty from estimated individual decay curves',
                   'Manual review is a sample audit plus all explicitly overridden works, not a review of every work')),

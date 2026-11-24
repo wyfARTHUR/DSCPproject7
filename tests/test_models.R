@@ -32,6 +32,20 @@ cross_year <- fit_decay(month_number('2018-01') + t, y, cfg)
 stopifnot(cross_year$peak_month == '2019-12', cross_year$post_peak_months == 12L)
 near(cross_year$half_life, 6)
 
+# Zero filling: absent months after first appearance become zero checkouts;
+# months before first appearance and months without a positive denominator stay absent.
+totals <- data.table(format = 'print', period = month_label(100:107), month_index = 100:107,
+                     format_total = c(50, 50, 50, 50, 0, 50, 50, 50))
+observed <- data.table(work_id = 'w1', format = 'print', period = month_label(c(102, 103, 106)),
+                       month_index = c(102L, 103L, 106L), checkouts = c(9, 4, 1), format_total = 50)
+filled <- complete_zero_months(observed, totals)
+stopifnot(identical(filled$month_index, c(102L, 103L, 105L, 106L, 107L)))
+stopifnot(identical(filled$checkouts, c(9, 4, 0, 1, 0)), all(filled$format_total == 50))
+stopifnot(nrow(observed) == 3L)
+stopifnot(nrow(complete_zero_months(observed[0], totals)) == 0L)
+bad_total <- copy(observed)[1, format_total := 49]
+stopifnot(inherits(try(complete_zero_months(bad_total, totals), silent = TRUE), 'try-error'))
+
 # Independently compare the within estimator/covariance with an explicit dummy regression.
 d <- CJ(book = 1:20, format = c('print', 'ebook', 'digital_audio'))
 d[, `:=`(work_id = paste0('b', book), status = 'decaying')]

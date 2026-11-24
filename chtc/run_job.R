@@ -46,7 +46,8 @@ tryCatch({
     R('scripts/02_build_shards.R')
     outputs[['review-bundle.rds']] <- c('run/audit', 'run/format_month_totals.parquet', 'run/merge_success.rds', 'run/metrics', 'run/job_status')
     for (s in seq_len(cfg$n_shards)) outputs[[sprintf('shard-%04d-input.rds', s)]] <-
-      c(sprintf('run/shards/%04d', s), 'run/merge_success.rds', 'run/audit/review_expected.parquet')
+      c(sprintf('run/shards/%04d', s), 'run/merge_success.rds', 'run/audit/review_expected.parquet',
+        'run/format_month_totals.parquet')
   } else if (stage %in% c('audit', 'fit')) {
     if (stage == 'audit') unpack_bundle(file.path(transfer, 'review-bundle.rds'), project) else {
       if (is.na(item) || item < 1L || item > cfg$n_shards) stop('Invalid shard.')

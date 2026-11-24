@@ -120,6 +120,25 @@ normalize_creator <- function(x) {
   normalize_text(x)
 }
 
+# SPL only records a title in months with at least one checkout, so an absent
+# work-format-month after the series first appears is a true zero. Months without
+# a positive format denominator (configured exclusions, zero-total months) stay absent.
+complete_zero_months <- function(d, totals) {
+  observed <- d[, .(work_id, format, month_index, checkouts, observed_total = format_total)]
+  if (!nrow(observed)) return(d[0, .(work_id, format, period, month_index, checkouts, format_total)])
+  if (anyDuplicated(observed[, .(work_id, format, month_index)])) stop('Duplicate work-format-month rows before zero filling.')
+  first <- observed[, .(first_month = min(month_index)), by = .(work_id, format)]
+  months <- totals[format_total > 0, .(format, period, month_index, format_total)]
+  if (anyDuplicated(months[, .(format, month_index)])) stop('Duplicate format-month denominators.')
+  grid <- merge(first, months, by = 'format', allow.cartesian = TRUE)[month_index >= first_month]
+  full <- merge(grid, observed, by = c('work_id', 'format', 'month_index'), all.x = TRUE)
+  if (nrow(observed[!full, on = .(work_id, format, month_index)])) stop('Observed rows lack a positive format-month denominator.')
+  if (any(!is.na(full$observed_total) & full$observed_total != full$format_total)) stop('Shard denominator disagrees with format-month totals.')
+  full[is.na(checkouts), checkouts := 0]
+  data.table::setorder(full, work_id, format, month_index)
+  full[, .(work_id, format, period, month_index, checkouts, format_total)]
+}
+
 work_key <- function(title, creator) paste(title, creator, sep = '\037')
 work_ids <- function(keys) paste0('w_', vapply(keys, digest::digest, character(1), algo = 'sha256', serialize = FALSE, USE.NAMES = FALSE))
 short_examples <- function(x, n = 3L) paste(head(sort(unique(x[!is.na(x) & nzchar(x)])), n), collapse = ' || ')

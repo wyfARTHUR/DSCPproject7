@@ -9,6 +9,8 @@ audit <- audit_state(ctx, state, identical(ctx$args[['allow-unreviewed']], 'true
 d <- rbindlist(lapply(ctx$years, function(year) read_pq(file.path(ctx$out, 'shards', sprintf('%04d', s), paste0(year, '.parquet')))))
 d <- d[!work_id %in% audit$rejected & format_total > 0]
 if (anyDuplicated(d[, .(work_id, format, month_index)])) stop('Duplicate work-format-month rows after merging years.')
+totals <- read_pq(file.path(ctx$out, 'format_month_totals.parquet'))
+d <- complete_zero_months(d, totals)
 d[, share := checkouts / format_total]
 scenarios <- c('main', 'omit_pandemic')
 results <- lapply(scenarios, function(scenario) {
