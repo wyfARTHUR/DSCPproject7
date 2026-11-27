@@ -1,7 +1,7 @@
 universe = container
 container_image = @CONTAINER_IMAGE@
 executable = job.sh
-arguments = year $(year) @ALLOW_UNREVIEWED@
+arguments = year $(year)
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 transfer_input_files = code.tar.gz

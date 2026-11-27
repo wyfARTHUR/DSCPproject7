@@ -3,10 +3,7 @@ set -euo pipefail
 # Small login-node bootstrap: standard shell/tar/sha256sum and Condor, no R/Python.
 mode="${1:-prepare}"
 run_arg="${2:-chtc_runs/run1}"
-allow=false
-if [[ "${3:-}" == --allow-unreviewed ]]; then allow=true; fi
-[[ "$mode" == prepare || "$mode" == merge || "$mode" == fit || "$mode" == all ]] || { echo 'Use prepare|merge|fit|all RUN_DIR [--allow-unreviewed]' >&2; exit 2; }
-if [[ "$mode" == all && "$allow" != true ]]; then echo 'all requires --allow-unreviewed; otherwise use prepare, review, fit.' >&2; exit 2; fi
+[[ $# -le 2 && ( "$mode" == prepare || "$mode" == merge || "$mode" == fit || "$mode" == all ) ]] || { echo 'Use prepare|merge|fit|all RUN_DIR' >&2; exit 2; }
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$root"
 if [[ -f config/chtc.env ]]; then source config/chtc.env; fi
@@ -35,7 +32,7 @@ else
   sha256sum --check --status "$run/source_checksums.txt" || { echo 'Code/config changed; start a new run.' >&2; exit 2; }
   if [[ "$mode" == fit ]]; then
     sha256sum --check --status "$run/override_checksum.txt" || { echo 'Overrides changed; run merge first.' >&2; exit 2; }
-    [[ -s "$run/match_review.tsv" && -s "$run/review-bundle.rds" ]] || { echo 'Missing merge outputs.' >&2; exit 2; }
+    [[ -s "$run/matching-bundle.rds" ]] || { echo 'Missing merge outputs.' >&2; exit 2; }
     while IFS= read -r shard; do [[ -s "$run/shard-$shard-input.rds" ]] || { echo "Missing shard $shard" >&2; exit 2; }; done < "$run/shards.txt"
   else
     while IFS= read -r year; do [[ -s "$run/year-$year.rds" ]] || { echo "Missing year $year" >&2; exit 2; }; done < "$run/years.txt"
@@ -52,10 +49,6 @@ cp chtc/job.sh "$run/job.sh"
 chmod 755 "$run/job.sh"
 cp chtc/templates/years.txt chtc/templates/shards.txt chtc/templates/*.dag "$run/"
 for file in chtc/templates/*.sub; do
-  sed -e "s|@CONTAINER_IMAGE@|$image|g" -e "s|@ALLOW_UNREVIEWED@|$allow|g" "$file" > "$run/$(basename "$file")"
+  sed -e "s|@CONTAINER_IMAGE@|$image|g" "$file" > "$run/$(basename "$file")"
 done
-if [[ "$mode" == merge && -f "$run/match_review.tsv" ]]; then
-  sed 's/^transfer_input_files = .*/&, match_review.tsv/' "$run/merge.sub" > "$run/merge.sub.partial"
-  mv "$run/merge.sub.partial" "$run/merge.sub"
-fi
 printf 'Prepared %s (no jobs submitted).\nRun:\n  cd %q\n  condor_submit_dag %s.dag\n' "$mode" "$run" "$mode"

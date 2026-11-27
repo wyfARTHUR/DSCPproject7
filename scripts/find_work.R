@@ -3,8 +3,8 @@ source('R/common.R')
 ctx <- init_context()
 query <- ctx$args$query
 if (is.null(query) || !nzchar(normalize_title(query))) stop('Supply --query with part of a book title.')
-catalog <- read_pq(file.path(ctx$out, 'audit', 'catalog_variants.parquet'))
-map <- read_pq(file.path(ctx$out, 'audit', 'normalized_key_map.parquet'))
+catalog <- read_pq(file.path(ctx$out, 'matching', 'catalog_variants.parquet'))
+map <- read_pq(file.path(ctx$out, 'matching', 'normalized_key_map.parquet'))
 matches <- catalog[stringi::stri_detect_fixed(title_norm, normalize_title(query))]
 matches <- merge(matches, map, by = c('title_norm', 'creator_norm'))
 setorder(matches, work_id, format, title_norm, creator_norm)

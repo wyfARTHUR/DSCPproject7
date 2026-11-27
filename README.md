@@ -9,7 +9,7 @@ Yearly ZIPs are also available in [GitHub Releases](https://github.com/wyfARTHUR
 ## R analysis and CHTC/HTCondor workflow
 
 The analysis pipeline now covers yearly CSV-to-Parquet preparation, cross-year
-work matching and manual match audit, parallel exponential share-decay fitting,
+automatic work matching, parallel exponential share-decay fitting,
 book fixed-effect comparisons, pandemic sensitivity, and plots.
 See **[CHTC.md](CHTC.md)** for the Chinese CHTC setup guide using the course's
 Apptainer and DAGMan patterns. Statistical choices, output definitions and tests
@@ -19,14 +19,14 @@ are documented in **[ANALYSIS.md](ANALYSIS.md)**.
 # First build/check the R container; follow CHTC.md.
 cp config/chtc.env.example config/chtc.env
 # Fill the real container URI in chtc.env, then prepare the supplied templates.
-bash chtc/prepare.sh prepare chtc_runs/run_R1
-cd chtc_runs/run_R1
-condor_submit_dag prepare.dag
-# When preparation finishes, complete match_review.tsv; then generate fit.dag.
+bash chtc/prepare.sh all chtc_runs/run_auto1
+cd chtc_runs/run_auto1
+condor_submit_dag all.dag
 ```
 
 The real container path and resource requests must match your environment. This repository does
-not automatically submit jobs or treat unreviewed matches as final results.
+not automatically submit jobs. The DAG proceeds from automatic matching directly
+to fitting and plots; no manual review table is required.
 
 ## Dataset and project size requirement
 

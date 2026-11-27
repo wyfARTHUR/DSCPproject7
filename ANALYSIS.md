@@ -9,7 +9,7 @@
 | 脚本 | 工作 |
 | --- | --- |
 | `scripts/01_prepare_year.R` | 年度月度 CSV 校验、格式筛选、分母和作品计数聚合、年度 Parquet |
-| `scripts/02_build_shards.R` | 跨年匹配、人工别名、审核样本和完整时间序列分片 |
+| `scripts/02_build_shards.R` | 跨年自动匹配、可选别名配置和完整时间序列分片 |
 | `scripts/03_fit_shard.R` | 一个作品分片的主分析与疫情敏感性拟合 |
 | `scripts/04_compare_plot.R` | 固定效应比较、拟合状态汇总、统计表与 PNG/PDF 图表 |
 
@@ -21,7 +21,7 @@ CHTC 使用仓库提供的 Apptainer 配方安装这些包，而不是假设执�
 年度脚本还需 `--year 2023`，拟合脚本需 `--shard 1`。
 手工运行完整数据处理时，应在已分配的计算资源上进行。
 
-## 数据与人工匹配
+## 数据与自动匹配
 
 格式映射在 `config/format_map.tsv`：`BOOK/REGPRINT/LARGEPRINT + Physical` 归为纸质书；
 `EBOOK + Digital` 和 `AUDIOBOOK + Digital` 分别为电子书和数字有声书。其他类型不会混入这三个格式。
@@ -29,16 +29,17 @@ CHTC 使用仓库提供的 Apptainer 配方安装这些包，而不是假设执�
 
 自动规则包括 Unicode 规范化、大小写/标点/空白处理，去掉明确的格式标记和书名后的责任说明，
 以及作者 `姓, 名, 生卒年` 的规范化。保留副标题和 abridged 信息，不使用模糊匹配，也不根据缺失作者猜测身份。
-同名同作者仍可能存在版本、语言或汇编差异，因此需要人工抽查。
+同名同作者仍可能存在版本、语言或汇编差异；结果采用这些自动匹配规则，不声称经过人工核验。
+匹配完成后直接进入拟合，不生成审核表，不要求填写审核人或接受/拒绝决定。
 
-`audit/match_review.tsv` 默认抽取最多 200 个自动匹配作品，另加所有人工别名作品。
-组员填写 `decision=accept/reject`、`reviewer` 和 `notes`。这是抽样审核，不代表每本书均已人工核验。
-`audit/match_candidates.tsv` 提供对应的规范化键及原始示例。
+`matching/normalized_key_map.parquet`、`matching/catalog_variants.parquet` 和
+`matching/eligible_works.parquet` 保存匹配映射、原始标题示例和符合条件的作品。
+`matching/work_shards.tsv` 记录作品所属的拟合分片。
 
-`config/match_overrides.tsv` 的每行指定精确 `title_norm`、`creator_norm`、目标 `work_id`、
-`include=TRUE/FALSE` 和依据 `notes`。不同键使用相同 `work_id` 才会人工合并；`work_id` 留空表示沿用自动 ID。
-修正后重建合并阶段，再检查审核表，最后重新拟合。`reject` 排除整本作品，但不改变格式月度分母。
-不要删除审核行或修改审核签名。
+`config/match_overrides.tsv` 是可选配置，默认只有表头，不需要填写。
+需要指定别名或排除项时，每行指定精确 `title_norm`、`creator_norm`、目标 `work_id`、
+`include=TRUE/FALSE` 和依据 `notes`。不同键使用相同 `work_id` 才会合并；`work_id` 留空表示沿用自动 ID。
+改变此配置后重建合并阶段并重新拟合，不改变格式月度分母。
 
 在有 R 的本地或交互计算环境，可以查找其他标题：
 
@@ -47,16 +48,13 @@ Rscript scripts/find_work.R --out analysis_output/run1 --query "harry potter"
 ```
 
 CHTC 的中间结果保存在传回的归档中；先解包成相应目录结构，再在有 R 的环境使用该查询脚本。
-审核不完整时普通拟合会停止。只有显式指定 `--allow-unreviewed true` 才允许探索拟合，
-且结果、图注和摘要均标记 `PRELIMINARY_UNREVIEWED`；不会自动填写人工审核。
-
 ## 统计定义与可调整选择
 
 设置位于 `config/analysis.json`，所有月份使用真实日历月份：
 
 1. 读取 2010 年 1 月到 2025 年 2 月，排除 2024 年 5、6 月。
 2. 每个作品格式月的份额为该作品借阅量除以**该格式全体书籍**当月借阅量。
-   分母在剔除缺失书名/作者、匹配、审核和多格式筛选之前计算。
+   分母在剔除缺失书名/作者、匹配和多格式筛选之前计算。
 3. 合并每个作品的完整跨年序列后，对每个格式取最高份额的月份作为峰值；并列时取最早月份。
 4. 从峰值开始拟合 `share(t) = A * exp(beta * t)`，`A ≥ 0`，时间单位为日历月。
    使用原始份额上的等权非线性最小二乘，解析消去振幅，再用网格定位及一维优化寻找速率。
@@ -84,16 +82,17 @@ CHTC 的中间结果保存在传回的归档中；先解包成相应目录结构
 `OUT/results/` 包括：
 
 - `all_fits.parquet`：每个作品/格式/情景的完整拟合结果。
-- `format_comparison.tsv`：固定效应比较、半衰期比值、区间、样本量和审核状态。
+- `format_comparison.tsv`：固定效应比较、半衰期比值、区间、样本量和匹配方法。
 - `fit_status_counts.tsv`、`non_decaying.tsv`、`unestimable.tsv`：拟合状态和未进入比较的原因。
-- `run_summary.json`：日期范围、审核状态、方法和限制。
+- `run_summary.json`：日期范围、运行状态、匹配方法和限制。
 - `figures/*.png` 和 `figures/*.pdf`：月度总借阅量、半衰期比较、拟合状态、示例衰减曲线。
   示例按可比较作品总借阅量排序选择，不按效果大小挑选。
 
 `OUT/metrics/` 保存每个任务的运行秒数、R 堆内存峰值、HTCondor ID 和 R/package session 信息。
 R 堆内存不等于进程 RSS；实际 CHTC 资源用量需要查看 HTCondor `.log` 或历史记录。
-缺少分片、配置/代码/别名不一致或审核变化时，后续阶段会报错，避免静默合并陈旧或不完整的结果。
-更改分析设置或代码后，使用新的运行目录；改变审核决定后重新拟合所有分片。
+缺少分片、配置/代码/别名不一致时，后续阶段会报错，避免静默合并陈旧或不完整的结果。
+更改分析设置或代码后，使用新的运行目录。`analysis_status=complete` 表示流水线完成，
+`matching_method` 记录匹配规则，不表示人工审核通过。
 
 ## 本地小规模验证
 
@@ -107,7 +106,7 @@ Rscript tests/test_chtc.R
 
 模型测试涵盖已知半衰期、真实日历间隔、峰后最少月份、跨年峰值、零值、非衰减与边界拟合。
 固定效应系数和聚类协方差与显式书籍虚拟变量回归独立核对。
-完整流程测试涵盖格式分母、别名修正、缺失月份、零总量月份、人工审核门槛、排除作品、
+完整流程测试涵盖格式分母、别名修正、缺失月份、零总量月份、自动匹配后直接拟合、配置排除作品、
 空分片、输出图表，以及缺失分片时阻止最终合并。CHTC 测试使用隔离沙盒模拟文件传输和每个 R 阶段，不调用 HTCondor，不构建容器，也不提交真实作业。
 
 参考接口：[data.table fread](https://rdatatable.gitlab.io/data.table/reference/fread.html)、

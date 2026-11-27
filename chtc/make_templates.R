@@ -16,15 +16,14 @@ put <- function(name, text) {
   writeBin(charToRaw(paste0(paste(text, collapse = '\n'), '\n')), connection)
 }
 submit <- function(stage, inputs, outputs, arguments, queue) {
-  resource_stage <- if (stage == 'audit') 'fit' else stage
-  cpu <- resources[[paste0(resource_stage, '_cpus')]]
+  cpu <- resources[[paste0(stage, '_cpus')]]
   c('universe = container', 'container_image = @CONTAINER_IMAGE@', 'executable = job.sh',
-    paste0('arguments = ', arguments, ' @ALLOW_UNREVIEWED@'),
+    paste0('arguments = ', arguments),
     'should_transfer_files = YES', 'when_to_transfer_output = ON_EXIT',
     paste0('transfer_input_files = ', paste(c('code.tar.gz', inputs), collapse = ', ')),
     paste0('transfer_output_files = ', paste(outputs, collapse = ', ')),
-    paste0('request_cpus = ', cpu), paste0('request_memory = ', resources[[paste0(resource_stage, '_memory')]]),
-    paste0('request_disk = ', resources[[paste0(resource_stage, '_disk')]]),
+    paste0('request_cpus = ', cpu), paste0('request_memory = ', resources[[paste0(stage, '_memory')]]),
+    paste0('request_disk = ', resources[[paste0(stage, '_disk')]]),
     sprintf('environment = "DSCP_CPUS=%s DSCP_JOB_ID=$(Cluster).$(Process)"', cpu),
     paste0('log = logs/', stage, '_$(Cluster).log'), paste0('output = logs/', stage, '_$(Cluster)_$(Process).out'),
     paste0('error = logs/', stage, '_$(Cluster)_$(Process).err'),
@@ -38,17 +37,15 @@ put('year.sub', submit('year', character(), 'year-$(year).rds', 'year $(year)', 
 put('pilot.sub', submit('year', character(), 'year-$(year).rds', 'year $(year)', paste0('queue year in (', years[1], ')')))
 shard_inputs <- paste0('shard-', shards, '-input.rds')
 put('merge.sub', submit('merge', paste0('year-', years, '.rds'),
-  c('review-bundle.rds', 'match_review.tsv', 'match_candidates.tsv', shard_inputs), 'merge 0', 'queue'))
-put('audit.sub', submit('audit', c('review-bundle.rds', 'match_review.tsv'), 'audit-ok.rds', 'audit 0', 'queue'))
-put('fit.sub', submit('fit', c('shard-$(shard)-input.rds', 'match_review.tsv'), 'fit-shard-$(shard).rds',
+  c('matching-bundle.rds', shard_inputs), 'merge 0', 'queue'))
+put('fit.sub', submit('fit', 'shard-$(shard)-input.rds', 'fit-shard-$(shard).rds',
   'fit $(shard)', 'queue shard from shards.txt'))
-put('compare.sub', submit('compare', c('review-bundle.rds', 'match_review.tsv', shard_inputs,
+put('compare.sub', submit('compare', c('matching-bundle.rds', shard_inputs,
   paste0('fit-shard-', shards, '.rds')), 'results', 'compare 0', 'queue'))
 prepare <- c('JOB YEARS year.sub', 'JOB MERGE merge.sub', 'PARENT YEARS CHILD MERGE')
-fit <- c('JOB AUDIT audit.sub', 'JOB FITS fit.sub', 'JOB COMPARE compare.sub',
-         'PARENT AUDIT CHILD FITS', 'PARENT FITS CHILD COMPARE')
+fit <- c('JOB FITS fit.sub', 'JOB COMPARE compare.sub', 'PARENT FITS CHILD COMPARE')
 put('prepare.dag', prepare)
 put('merge.dag', 'JOB MERGE merge.sub')
 put('fit.dag', fit)
-put('all.dag', c(prepare, fit, 'PARENT MERGE CHILD AUDIT'))
+put('all.dag', c(prepare, fit, 'PARENT MERGE CHILD FITS'))
 cat('Generated R-only job templates in ', out, '\n', sep = '')

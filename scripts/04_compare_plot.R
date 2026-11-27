@@ -4,10 +4,9 @@ source('R/models.R')
 ctx <- init_context()
 need_packages('ggplot2')
 state <- merge_state(ctx)
-audit <- audit_state(ctx, state, identical(ctx$args[['allow-unreviewed']], 'true'))
 for (s in seq_len(ctx$cfg$n_shards)) {
   marker <- require_marker(file.path(ctx$out, 'fits', sprintf('shard-%04d-success.rds', s)), ctx$signature)
-  if (!identical(marker$merge_signature, state$merge_signature) || !identical(marker$audit_signature, audit$signature)) stop('Stale fit shard: ', s)
+  if (!identical(marker$merge_signature, state$merge_signature)) stop('Stale fit shard: ', s)
 }
 fits <- rbindlist(lapply(seq_len(ctx$cfg$n_shards), function(s) read_pq(file.path(ctx$out, 'fits', sprintf('shard-%04d.parquet', s)))), use.names = TRUE)
 if (anyDuplicated(fits[, .(scenario, work_id, format)])) stop('Duplicate fit results.')
@@ -16,7 +15,7 @@ comparison <- rbindlist(lapply(c('main', 'omit_pandemic'), function(label) {
   value[, scenario := label]
   value
 }))
-comparison[, audit_status := audit$status]
+comparison[, matching_method := matching_method()]
 status <- fits[, .(fits = .N), by = .(scenario, format, status)]
 results <- file.path(ctx$out, 'results')
 figures <- file.path(results, 'figures')
@@ -27,8 +26,7 @@ write_tsv(status, file.path(results, 'fit_status_counts.tsv'))
 write_tsv(fits[status == 'non_decaying'], file.path(results, 'non_decaying.tsv'))
 write_tsv(fits[status %in% c('insufficient_post_peak_months', 'rate_at_boundary', 'no_positive_share')],
           file.path(results, 'unestimable.tsv'))
-caption <- if (audit$status == 'PRELIMINARY_UNREVIEWED') 'PRELIMINARY: manual match audit is incomplete' else
-  sprintf('Manual audit: %d sampled/overridden works reviewed; comparisons are descriptive', audit$required)
+caption <- 'Automatic title/creator matching; comparisons are descriptive'
 theme <- ggplot2::theme_minimal(base_size = 11) +
   ggplot2::theme(plot.caption = ggplot2::element_text(hjust = 0), panel.grid.minor = ggplot2::element_blank())
 save_plot <- function(plot, name, width = 8, height = 5) {
@@ -64,10 +62,10 @@ if (nrow(status)) {
 # Illustrative examples are the highest-checkout comparable works, not selected by effect size.
 comparable <- fits[scenario == 'main' & status == 'decaying',
                    .(ok = 'print' %in% format && any(format != 'print')), by = work_id][ok == TRUE, work_id]
-catalog <- read_pq(file.path(ctx$out, 'audit', 'eligible_works.parquet'))
+catalog <- read_pq(file.path(ctx$out, 'matching', 'eligible_works.parquet'))
 examples <- head(catalog[work_id %in% comparable][order(-total_checkouts, work_id)], 4L)
 if (nrow(examples)) {
-  shards <- fread(file.path(ctx$out, 'audit', 'work_shards.tsv'))
+  shards <- fread(file.path(ctx$out, 'matching', 'work_shards.tsv'))
   shard_ids <- unique(shards[work_id %in% examples$work_id, shard])
   observed <- rbindlist(lapply(shard_ids, function(s) rbindlist(lapply(ctx$years, function(year) {
     read_pq(file.path(ctx$out, 'shards', sprintf('%04d', s), paste0(year, '.parquet')))[work_id %in% examples$work_id]
@@ -98,8 +96,7 @@ if (nrow(examples)) {
   save_plot(p, 'example_decay_curves', width = 12, height = 7)
   write_tsv(examples, file.path(results, 'example_works.tsv'))
 }
-write_json(list(analysis_status = audit$status, audited_works = audit$reviewed,
-                required_audit_works = audit$required, rejected_audit_works = length(audit$rejected),
+write_json(list(analysis_status = 'complete', matching_method = matching_method(),
                 fit_rows = nrow(fits), eligible_works = state$works,
                 calendar_start = ctx$cfg$start_month, calendar_end = ctx$cfg$end_month,
                 excluded_months = ctx$cfg$exclude_months,
@@ -110,6 +107,6 @@ write_json(list(analysis_status = audit$status, audited_works = audit$reviewed,
                   'Absent work-month rows after first appearance are treated as zero checkouts (SPL lists only titles checked out that month)',
                   'Fixed-effect comparisons condition on estimable decaying print and digital fits',
                   'Cluster intervals do not propagate uncertainty from estimated individual decay curves',
-                  'Manual review is a sample audit plus all explicitly overridden works, not a review of every work')),
+                  'Work matches use configured title/creator normalization rules without manual review')),
            file.path(results, 'run_summary.json'))
-finish_stage(ctx, 'compare-plot', list(audit_status = audit$status, comparison_rows = nrow(comparison)))
+finish_stage(ctx, 'compare-plot', list(comparison_rows = nrow(comparison)))

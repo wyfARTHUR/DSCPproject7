@@ -161,17 +161,4 @@ read_overrides <- function(ctx) {
   x
 }
 
-audit_state <- function(ctx, state, allow_unreviewed = FALSE) {
-  path <- file.path(ctx$out, 'audit', 'match_review.tsv')
-  review <- data.table::fread(path, colClasses = 'character', na.strings = '')
-  expected <- read_pq(file.path(ctx$out, 'audit', 'review_expected.parquet'))
-  if (anyDuplicated(review$work_id) || !setequal(review$work_id, expected$work_id)) stop('Audit work ID list was changed. Edit decisions/reviewer/notes only.')
-  review <- merge(expected[, .(work_id, review_signature)], review, by = 'work_id', suffixes = c('_expected', ''))
-  if (any(review$review_signature != review$review_signature_expected)) stop('Audit signatures were changed or are stale.')
-  if (any(!is.na(review$decision) & !review$decision %in% c('accept', 'reject'))) stop('Audit decision must be accept, reject, or blank.')
-  complete <- nrow(review) > 0L && all(!is.na(review$decision) & !is.na(review$reviewer) & nzchar(trimws(review$reviewer)))
-  if (!complete && !allow_unreviewed) stop('Manual match audit is incomplete. Fill audit/match_review.tsv, or use --allow-unreviewed true for exploratory results only.')
-  list(signature = sha(as.data.frame(review)), rejected = review[decision == 'reject', work_id],
-       status = if (complete) 'audit_sample_complete' else 'PRELIMINARY_UNREVIEWED',
-       reviewed = sum(!is.na(review$decision)), required = nrow(review))
-}
+matching_method <- function() 'normalized_title_creator_with_optional_overrides'

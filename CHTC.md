@@ -79,79 +79,39 @@ Rscript chtc/make_templates.R
 
 再把更新的配置和 `chtc/templates/` 同步到 Git。模板与配置不一致时，准备脚本会停止。
 
-这一版使用 RDS 传输包，建议使用新的运行目录，不与旧版 `.tar.gz` 中间结果混用：
+这一版取消了人工审核阶段，使用新的运行目录 `run_auto1`，避免与旧代码生成的中间结果混用：
 
 ```bash
-bash chtc/prepare.sh prepare chtc_runs/run_R1
+bash chtc/prepare.sh all chtc_runs/run_auto1
 ```
 
 这一步只用标准 Shell、`tar` 和 `sha256sum` 打包少量代码、替换镜像路径、建立日志目录，
 **不会提交作业**。代码包排除原始 CSV、`.git`、R 安装目录、镜像和历史 Python 工具。
 
-## 4. 先试跑，再提交年度处理与匹配
+## 4. 先试跑，再提交完整流水线
 
 ```bash
-cd chtc_runs/run_R1
+cd chtc_runs/run_auto1
 condor_submit pilot.sub
 condor_q
 ```
 
 检查 `logs/` 的 `.out`、`.err`、`.log`，确认镜像、下载、CSV 校验和 Parquet 写入成功。
-模板里的资源请求是初始建议，不是 CHTC 实测值；如需调整，编辑本运行目录 `.sub` 中的
+模板里的资源请求是初始建议，需根据试跑结果调整本运行目录 `.sub` 中的
 `request_cpus`、`request_memory`、`request_disk`。
 
-然后提交完整准备阶段：
+然后提交完整流程（年度作业会重新生成试跑年份的结果）：
 
 ```bash
-condor_submit_dag prepare.dag
+condor_submit_dag all.dag
 condor_q -dag -nobatch
 ```
-
-流程为：
 
 ```text
 year.sub: queue year from years.txt
                   |
                   v
-merge.sub: 跨年匹配、审核表和拟合分片
-```
-
-年度作业返回 `year-YYYY.rds`，不会返回原始 CSV/ZIP。
-合并返回 `match_review.tsv`、`match_candidates.tsv`、`review-bundle.rds` 和 `shard-NNNN-input.rds`。
-RDS 包以原始字节保存指定文件，并验证每个成员的 SHA-256；不同作业不依赖共享工作目录。
-
-## 5. 人工审核与修正
-
-编辑运行目录的 `match_review.tsv`，填写 `decision=accept/reject`、实际组员 `reviewer` 和 `notes`。
-不要删除行、修改作品 ID 或审核签名。抽查包括最多 200 个自动匹配作品和所有人工别名作品，
-不代表每本书都经过人工核验。
-
-需要修正匹配时，在仓库根目录编辑 `config/match_overrides.tsv`。
-从 `match_candidates.tsv` 复制精确的规范化标题、作者；要合并的键填写同一个 `work_id`，
-`include` 为 `TRUE` 或 `FALSE`。然后重新提交合并阶段：
-
-```bash
-# 从仓库根目录运行
-bash chtc/prepare.sh merge chtc_runs/run_R1
-cd chtc_runs/run_R1
-condor_submit_dag merge.dag
-```
-
-无须重新处理年度 CSV。成员未改变的已有审核决定会保留；成员改变的作品需要重新审核。
-其他统计代码或配置改变时，应使用新运行目录。
-
-## 6. R 审核检查、并行拟合和最终结果
-
-审核完成后，从仓库根目录运行：
-
-```bash
-bash chtc/prepare.sh fit chtc_runs/run_R1
-cd chtc_runs/run_R1
-condor_submit_dag fit.dag
-```
-
-```text
-audit.sub: 单个 R 作业检查人工审核
+merge.sub: 跨年自动匹配和作品分片
                   |
                   v
 fit.sub: queue shard from shards.txt
@@ -160,22 +120,54 @@ fit.sub: queue shard from shards.txt
 compare.sub: 比较、敏感性分析和图表
 ```
 
-审核不完整时第一个 R 作业失败，后续拟合不会启动。每个拟合分片和最终合并还会核验审核与版本。
-最终图表和表格直接返回到 `results/run/results/`，无须用 Python 或 R 解压。
-资源/包版本记录在 `results/run/metrics/`，作业状态在 `results/run/job_status/`。
-R 堆内存不是进程 RSS，真实 CHTC 用量还应查看 HTCondor `.log` 或 `condor_history JOB_ID -long`。
+匹配后直接拟合，不需要填写或上传人工审核表，也不需要额外的跳过审核参数。
+默认分析共有 16 个年度作业、1 个合并作业、32 个拟合作业和 1 个汇总作业。
 
-探索模式只用于明确接受未审核匹配的流程检查：
+年度作业返回 `year-YYYY.rds`，不会返回原始 CSV/ZIP。
+合并返回 `matching-bundle.rds` 和 `shard-NNNN-input.rds`。
+RDS 包以原始字节保存指定文件，并验证每个成员的 SHA-256；不同作业不依赖共享工作目录。
+原有的缺失月份补零、全格式月度分母以及代码/配置版本校验继续保留。
+
+## 5. 分阶段运行与可选匹配配置
+
+也可以先运行 `prepare.dag`（年度处理和匹配），完成后再运行 `fit.dag`（拟合和汇总）：
 
 ```bash
-bash chtc/prepare.sh all chtc_runs/exploratory_R1 --allow-unreviewed
-cd chtc_runs/exploratory_R1
-condor_submit_dag all.dag
+# 从仓库根目录运行；使用一个尚未存在的运行目录
+bash chtc/prepare.sh prepare chtc_runs/run_auto2
+cd chtc_runs/run_auto2
+condor_submit_dag prepare.dag
+# 等待 prepare.dag 成功，再返回仓库根目录
+cd ../..
+bash chtc/prepare.sh fit chtc_runs/run_auto2
+cd chtc_runs/run_auto2
+condor_submit_dag fit.dag
 ```
 
-输出会标记 `PRELIMINARY_UNREVIEWED`，不会伪造组员审核。正式比较仍需完成审核并重跑拟合。
-每个运行目录冻结代码、配置和镜像 URI；运行中不要更新其文件。更改审核后应重跑全部拟合。
-失败作业会返回诊断，非零退出会阻止后续 DAG 节点；不要将失败/旧作业的结果作为新结论。
+`config/match_overrides.tsv` 是可选的别名和排除配置，默认无需填写。
+需要修改时，使用精确的规范化标题、作者；要合并的键填写相同 `work_id`，
+`include` 为 `TRUE` 或 `FALSE`。仅修改此配置时，可以复用年度结果重跑合并：
+
+```bash
+# 从仓库根目录运行
+bash chtc/prepare.sh merge chtc_runs/run_auto1
+cd chtc_runs/run_auto1
+condor_submit_dag merge.dag
+# 合并成功后，重新 prepare.sh fit 并提交 fit.dag
+```
+
+其他统计代码或配置改变时，应使用新的运行目录。旧版运行目录不能直接沿用此次流程。
+
+## 6. 获取结果
+
+最终图表和表格直接返回到 `results/run/results/`，无须手动解压。
+资源/包版本记录在 `results/run/metrics/`，作业状态在 `results/run/job_status/`。
+`run_summary.json` 的 `analysis_status=complete` 表示计算完成，`matching_method` 记录自动匹配方法。
+图注说明采用自动匹配，不声称人工审核通过。
+
+R 堆内存不是进程 RSS，真实 CHTC 用量还应查看 HTCondor `.log` 或 `condor_history JOB_ID -long`。
+每个运行目录冻结代码、配置和镜像 URI；运行中不要更新其文件。
+失败作业会返回诊断，非零退出会阻止后续 DAG 节点。缺失分片或版本不一致仍会阻止最终汇总。
 
 ## 7. 本地 R 测试
 
@@ -185,7 +177,7 @@ Rscript tests/test_pipeline.R
 Rscript tests/test_chtc.R
 ```
 
-最后一个测试使用小型模拟数据和独立沙盒，实际运行 R 年度处理、RDS 文件传输、审核门槛、拟合和图表。
+最后一个测试使用小型模拟数据和独立沙盒，实际运行 R 年度处理、RDS 文件传输、自动匹配后直接拟合和图表。
 它会调用短 Shell 准备脚本，但不调用 Python、HTCondor 或 Apptainer，不提交真实作业。
 Linux 镜像构建和真实 CHTC 调度仍需按上述步骤试跑。
 

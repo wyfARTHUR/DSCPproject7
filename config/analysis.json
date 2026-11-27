@@ -12,6 +12,5 @@
   "rate_zero_tolerance": 0.000001,
   "pandemic_start": "2020-03",
   "pandemic_end": "2021-12",
-  "audit_sample_size": 200,
   "verify_input_hashes": true
 }

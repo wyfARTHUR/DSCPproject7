@@ -22,13 +22,13 @@ if (nrow(overrides)) {
     if (!is.na(x$work_id)) keys[index, work_id := x$work_id]
   }
 }
-write_pq(keys, file.path(ctx$out, 'audit', 'normalized_key_map.parquet'))
-write_pq(catalog, file.path(ctx$out, 'audit', 'catalog_variants.parquet'))
+write_pq(keys, file.path(ctx$out, 'matching', 'normalized_key_map.parquet'))
+write_pq(catalog, file.path(ctx$out, 'matching', 'catalog_variants.parquet'))
 catalog <- merge(catalog, keys, by = c('title_norm', 'creator_norm'), all.x = TRUE)
 work_formats <- catalog[include == TRUE, .(checkouts = sum(checkouts)), by = .(work_id, format)]
 eligible <- work_formats[checkouts > 0, .(eligible = 'print' %in% format && any(format != 'print')), by = work_id][eligible == TRUE, work_id]
 map <- keys[include == TRUE & work_id %in% eligible]
-if (!nrow(map)) stop('No cross-format works containing print were found. Inspect audit/catalog_variants.parquet and normalization/overrides.')
+if (!nrow(map)) stop('No cross-format works containing print were found. Inspect matching/catalog_variants.parquet and normalization/overrides.')
 work_catalog <- catalog[work_id %in% eligible & include == TRUE,
   .(formats = paste(sort(unique(format)), collapse = ', '),
     display_title = sort(unique(title_norm[format == 'print']))[1],
@@ -36,34 +36,14 @@ work_catalog <- catalog[work_id %in% eligible & include == TRUE,
     title_examples = short_examples(paste(format, title_example, sep = ': '), 6L),
     creator_examples = short_examples(creator_example, 6L), normalized_keys = uniqueN(work_key(title_norm, creator_norm)),
     manual_override = any(manual_override), total_checkouts = sum(checkouts)), by = work_id]
-membership <- map[, .(review_signature = sha(sort(work_key(title_norm, creator_norm)))), by = work_id]
-work_catalog <- merge(work_catalog, membership, by = 'work_id')
 setorder(work_catalog, work_id)
-sample_ids <- head(work_catalog[manual_override == FALSE, work_id], ctx$cfg$audit_sample_size)
-review <- copy(work_catalog[work_id %in% sample_ids | manual_override == TRUE])
-review[, `:=`(decision = NA_character_, reviewer = NA_character_, notes = NA_character_)]
-review_path <- file.path(ctx$out, 'audit', 'match_review.tsv')
-if (file.exists(review_path)) {
-  old <- fread(review_path, colClasses = 'character', na.strings = '')
-  if (all(c('work_id', 'review_signature', 'decision', 'reviewer', 'notes') %in% names(old)) && !anyDuplicated(old$work_id)) {
-    for (i in seq_len(nrow(review))) {
-      match_row <- old[work_id == review$work_id[i] & review_signature == review$review_signature[i]]
-      if (nrow(match_row) == 1L) review[i, c('decision', 'reviewer', 'notes') := match_row[, .(decision, reviewer, notes)]]
-    }
-  }
-}
-write_tsv(review, review_path)
-write_pq(review[, .(work_id, review_signature)], file.path(ctx$out, 'audit', 'review_expected.parquet'))
-write_tsv(catalog[work_id %in% review$work_id & include == TRUE,
-                  .(work_id, title_norm, creator_norm, format, title_example, creator_example)],
-          file.path(ctx$out, 'audit', 'match_candidates.tsv'))
-write_pq(work_catalog, file.path(ctx$out, 'audit', 'eligible_works.parquet'))
+write_pq(work_catalog, file.path(ctx$out, 'matching', 'eligible_works.parquet'))
 ids <- sort(unique(map$work_id))
 shards <- data.table(work_id = ids, shard = vapply(ids, function(id) {
   as.integer(strtoi(substr(digest::digest(id, algo = 'sha256', serialize = FALSE), 1, 7), 16L) %% ctx$cfg$n_shards + 1L)
 }, integer(1)))
 map <- merge(map, shards, by = 'work_id')
-write_tsv(shards, file.path(ctx$out, 'audit', 'work_shards.tsv'))
+write_tsv(shards, file.path(ctx$out, 'matching', 'work_shards.tsv'))
 denominators <- rbindlist(lapply(ctx$years, function(y) read_pq(file.path(ctx$out, 'totals', paste0(y, '.parquet')))))
 if (anyDuplicated(denominators[, .(format, period)])) stop('Duplicate format-month denominators.')
 write_pq(denominators, file.path(ctx$out, 'format_month_totals.parquet'))
@@ -84,5 +64,5 @@ state <- list(signature = ctx$signature, override_signature = override_signature
               merge_signature = sha(list(ctx$signature, override_signature, as.data.frame(shards))),
               years = ctx$years, n_shards = ctx$cfg$n_shards, works = length(ids))
 write_rds(state, file.path(ctx$out, 'merge_success.rds'))
-finish_stage(ctx, 'build-shards', list(eligible_works = length(ids), required_audit_rows = nrow(review)))
-message('Next: inspect ', review_path, '; fill decision=accept/reject and reviewer. Then submit fit jobs.')
+finish_stage(ctx, 'build-shards', list(eligible_works = length(ids)))
+message('Matching complete; fit shards can run directly.')

@@ -10,7 +10,6 @@ cfg$match_overrides <- file.path(fixture, 'overrides.tsv')
 cfg$start_month <- '2018-01'; cfg$end_month <- '2022-12'
 cfg$exclude_months <- '2020-05'
 cfg$n_shards <- 4L
-cfg$audit_sample_size <- 200L
 cfg_path <- file.path(fixture, 'config.R')
 dput(cfg, cfg_path)
 out <- file.path(fixture, 'run')
@@ -96,21 +95,11 @@ totals <- read_pq(file.path(out, 'format_month_totals.parquet'))
 stopifnot(all(totals[!(format == 'digital_audio' & period == '2021-06'), format_total] == 100000))
 stopifnot(totals[format == 'digital_audio' & period == '2021-06', format_total] == 0)
 stopifnot(!'2020-05' %in% totals$period)
-map <- read_pq(file.path(out, 'audit', 'normalized_key_map.parquet'))
+map <- read_pq(file.path(out, 'matching', 'normalized_key_map.parquet'))
 stopifnot(all(map[title_norm %in% c('atlas', 'atlas a journey'), work_id] == 'manual_atlas'))
-shards <- fread(file.path(out, 'audit', 'work_shards.tsv'))
-target_shard <- shards[work_id == 'manual_atlas', shard]
-error <- run('scripts/03_fit_shard.R', c('--shard', target_shard), success = FALSE)
-stopifnot(any(grepl('Manual match audit is incomplete', error, fixed = TRUE)))
-run('scripts/03_fit_shard.R', c('--shard', target_shard, '--allow-unreviewed', 'true'))
-prelim <- read_pq(file.path(out, 'fits', sprintf('shard-%04d.parquet', target_shard)))
-stopifnot(all(prelim$audit_status == 'PRELIMINARY_UNREVIEWED'))
-review_path <- file.path(out, 'audit', 'match_review.tsv')
-review <- fread(review_path, colClasses = 'character', na.strings = '')
-review[, `:=`(decision = 'accept', reviewer = 'synthetic-test')]
-reject_id <- map[title_norm == 'rejectme', work_id]
-review[work_id == reject_id, decision := 'reject']
-write_tsv(review, review_path)
+shards <- fread(file.path(out, 'matching', 'work_shards.tsv'))
+stopifnot(!dir.exists(file.path(out, 'audit')), !file.exists(file.path(out, 'matching/match_review.tsv')))
+automatic_id <- map[title_norm == 'rejectme', work_id]
 for (s in 1:4) run('scripts/03_fit_shard.R', c('--shard', s))
 run('scripts/04_compare_plot.R')
 fits <- read_pq(file.path(out, 'results', 'all_fits.parquet'))
@@ -123,28 +112,26 @@ for (f in formats) {
 stopifnot(atlas[format == 'print', post_peak_months] == 35L)
 stopifnot(atlas[format == 'digital_audio', post_peak_months] == 34L)
 stopifnot(atlas[format == 'print', post_peak_span] == 36L)
-stopifnot(!any(fits$work_id %in% c(reject_id, map[title_norm == 'excluded work', work_id])))
-# Absent source rows after first appearance are zero-filled, not dropped.
-beta_print <- fits[scenario == 'main' & work_id == map[title_norm == 'beta', work_id] & format == 'print']
-stopifnot(beta_print$post_peak_months == 35L, beta_print$zero_post_peak_months == 1L)
-zero_tail <- fits[scenario == 'main' & work_id == map[title_norm == 'zero tail', work_id]]
-stopifnot(nrow(zero_tail) == 3L, all(zero_tail[format != 'digital_audio', zero_post_peak_months] == 22L))
+stopifnot(automatic_id %in% fits$work_id, !any(fits$work_id %in% map[title_norm == 'excluded work', work_id]))
 # Absent source rows after first appearance are zero-filled, not dropped.
 beta_print <- fits[scenario == 'main' & work_id == map[title_norm == 'beta', work_id] & format == 'print']
 stopifnot(beta_print$post_peak_months == 35L, beta_print$zero_post_peak_months == 1L)
 zero_tail <- fits[scenario == 'main' & work_id == map[title_norm == 'zero tail', work_id]]
 stopifnot(nrow(zero_tail) == 3L, all(zero_tail[format != 'digital_audio', zero_post_peak_months] == 22L))
 stopifnot(any(fits$status == 'non_decaying'), any(fits$zero_post_peak_months > 0))
-stopifnot(all(fits$audit_status == 'audit_sample_complete'))
+stopifnot(all(fits$matching_method == matching_method()), !'audit_status' %in% names(fits))
+summary <- jsonlite::fromJSON(file.path(out, 'results/run_summary.json'))
+stopifnot(summary$analysis_status == 'complete', summary$matching_method == matching_method())
 comparison <- fread(file.path(out, 'results', 'format_comparison.tsv'))
 stopifnot(nrow(comparison) == 4L, any(comparison$status == 'estimated'))
-# Changed audit decisions/notes invalidate previously computed fit shards.
-changed_review <- copy(review)
-changed_review[1, notes := 'Changed after fitting']
-write_tsv(changed_review, review_path)
+# Fits from a different merge must still be rejected.
+stale_marker <- file.path(out, 'fits', 'shard-0001-success.rds')
+original_marker <- readRDS(stale_marker)
+stale <- original_marker; stale$merge_signature <- 'different-merge'
+saveRDS(stale, stale_marker)
 stale_error <- run('scripts/04_compare_plot.R', success = FALSE)
 stopifnot(any(grepl('Stale fit shard', stale_error, fixed = TRUE)))
-write_tsv(review, review_path)
+saveRDS(original_marker, stale_marker)
 # A missing shard must block final aggregation rather than quietly produce partial results.
 marker <- file.path(out, 'fits', 'shard-0004-success.rds')
 saved <- readRDS(marker); unlink(marker)
