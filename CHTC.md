@@ -86,7 +86,7 @@ bash chtc/prepare.sh all chtc_runs/run_auto1
 ```
 
 这一步只用标准 Shell、`tar` 和 `sha256sum` 打包少量代码、替换镜像路径、建立日志目录，
-**不会提交作业**。代码包排除原始 CSV、`.git`、R 安装目录、镜像和历史 Python 工具。
+**不会提交作业**。代码包排除原始 CSV、`.git`、R 安装目录和镜像。
 
 ## 4. 先试跑，再提交完整流水线
 

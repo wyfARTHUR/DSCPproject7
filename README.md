@@ -144,14 +144,14 @@ MB and GB above use decimal units. GiB uses 1,073,741,824 bytes.
 
 ## Historical source splitting
 
-The original one-time lossless splitting is already complete. Its historical
-`scripts/prepare_data.py` is retained for provenance; it is excluded from the
-current job bundle and is not needed to run the R analysis. Current downloading,
-verification, processing, modeling, plotting and job logic are written in R.
+The original one-time lossless splitting is already complete. The retired Python
+splitter has been removed from the current tree; its source remains in Git history.
+Current downloading, verification, processing, modeling, plotting and job logic
+are written in R. The prepared CSVs and verification metadata remain available.
 
-The parser handles quoted fields, escaped quotes, embedded newlines, and UTF-8.
-It validates all 12 columns and every year/month, while retaining each original
-record's bytes. Every output has the original 152-byte header. Quoting, `NA`
+The original splitting handled quoted fields, escaped quotes, embedded newlines,
+and UTF-8. It validated all 12 columns and every year/month, while retaining each
+original record's bytes. Every output has the original 152-byte header. Quoting, `NA`
 values, text, duplicates, and column order are preserved. Records retain their
 source order within each month. Grouping by month changes global record order.
 No records are cleaned, aggregated, filtered, or deduplicated.
